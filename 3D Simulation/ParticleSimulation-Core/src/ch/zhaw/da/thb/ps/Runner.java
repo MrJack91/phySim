@@ -3,6 +3,9 @@
  */
 package ch.zhaw.da.thb.ps;
 
+import ch.zhaw.da.thb.ps.graphic.SimulationGUI;
+import ch.zhaw.da.zhb.ps.BaseParticleSystem;
+
 /**
  * @author Daniel Brun
  * 
@@ -24,6 +27,9 @@ public class Runner {
 		
 		
 		//Start GUI
+		
+		//TODO: Simulation GUI should be started from Simulation-Control-GUI
+		new SimulationGUI(new BaseParticleSystem(1000),200);
 	}
 
 	/**
