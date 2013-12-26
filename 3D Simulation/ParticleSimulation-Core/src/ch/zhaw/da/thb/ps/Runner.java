@@ -22,14 +22,14 @@ public class Runner {
 		//Start Server
 		
 		//Start Simulator (Separate Thread)
-		
+		SimulationServer simuServer = new SimulationServer();
 		//Register Local-Handler
 		
 		
 		//Start GUI
 		
 		//TODO: Simulation GUI should be started from Simulation-Control-GUI
-		new SimulationGUI(new BaseParticleSystem(1000),200);
+		new SimulationGUI(new BaseParticleSystem(1000),simuServer,200);
 	}
 
 	/**

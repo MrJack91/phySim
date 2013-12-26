@@ -14,6 +14,7 @@ import javax.media.j3d.TransformGroup;
 import javax.swing.JFrame;
 import javax.vecmath.Point3d;
 
+import ch.zhaw.da.thb.ps.handler.SimulationHandler;
 import ch.zhaw.da.zhb.ps.BaseParticleSystem;
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
@@ -36,17 +37,20 @@ public class SimulationGUI extends JFrame {
 	
 	private BaseParticleSystem particleSystem;
 	private int timerDelay;
+	private SimulationHandler simuHandler;
 	
 	/**
 	 * Creates a new instance of this class.
 	 * 
 	 * @param aParticleSystem The particle system to simulate.
+	 * @param aHandler The simulation handler.
 	 * @param aTimerDelay The timer delay.
 	 */
-	public SimulationGUI(BaseParticleSystem aParticleSystem, int aTimerDelay) {
+	public SimulationGUI(BaseParticleSystem aParticleSystem, SimulationHandler aHandler, int aTimerDelay) {
 
 		particleSystem = aParticleSystem;
 		timerDelay = aTimerDelay;
+		simuHandler = aHandler;
 		
 		initComponents();
 
@@ -93,7 +97,7 @@ public class SimulationGUI extends JFrame {
 		BranchGroup rootObj = new BranchGroup();
 		
 		psGraphic = new ParticleSystemGraphic(particleSystem);
-		psUpdater = new ParticleSystemUpdater(particleSystem);
+		psUpdater = new ParticleSystemUpdater(particleSystem,simuHandler);
 		psControler = new ParticleSystemControler(timerDelay, psUpdater, psGraphic);
 				
 		BoundingSphere sphere = new BoundingSphere(new Point3d(0,0,0),100);
