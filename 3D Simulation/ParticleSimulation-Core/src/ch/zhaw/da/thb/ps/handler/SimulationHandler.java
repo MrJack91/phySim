@@ -13,10 +13,9 @@ import ch.zhaw.da.zhb.ps.BaseParticleSystem;
 public interface SimulationHandler {
 
 	/**
-	 * Updates the given particle system with the next available data.
+	 * Returns the next particle system.
 	 * 
-	 * @param aParticleSystem The particle system to update.
 	 * @return The updated particle system.
 	 */
-	public BaseParticleSystem updateParticleSystemWithNextAvailable(BaseParticleSystem aParticleSystem);
+	public BaseParticleSystem updateParticleSystemWithNextAvailable();
 }

@@ -18,7 +18,7 @@ import ch.zhaw.da.zhb.ps.BaseParticleSystem;
  */
 public class ParticleSystemGraphic extends Shape3D {
 
-	private static final float POINT_SIZE = 2.0f;
+	private static final float POINT_SIZE = 3.0f;
 	
 	private PointArray pointArray;
 
@@ -39,7 +39,7 @@ public class ParticleSystemGraphic extends Shape3D {
 		//Set "Permission" for change
 		pointArray.setCapability(GeometryArray.ALLOW_REF_DATA_WRITE);
 		pointArray.setCapability(GeometryArray.ALLOW_REF_DATA_READ);
-
+		
 		createGeometry();
 		createAppearance();
 	}
@@ -62,8 +62,7 @@ public class ParticleSystemGraphic extends Shape3D {
 	 * Create the geometry of the particle system.
 	 */
 	private void createGeometry() {
-		particleSystem.initializeParticleSystem();
-
+		
 		pointArray.setCoordRefFloat(particleSystem.getCoordinates());
 		pointArray.setColorRefFloat(particleSystem.getColors());
 
@@ -77,6 +76,5 @@ public class ParticleSystemGraphic extends Shape3D {
 	 */
 	public void invokeUpdate(ParticleSystemUpdater anUpdater) {
 		pointArray.updateData(anUpdater);
-		
 	}
 }

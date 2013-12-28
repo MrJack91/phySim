@@ -4,13 +4,14 @@
 package ch.zhaw.da.zhb.ps;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * @author Daniel Brun
  *
  * Holds the base data for a particle system
  */
-public class BaseParticleSystem implements Serializable {
+public class BaseParticleSystem implements Serializable, Cloneable {
 
 	/**
 	 * Generated Serial Version UID.
@@ -33,37 +34,23 @@ public class BaseParticleSystem implements Serializable {
 	public BaseParticleSystem(int aParticleCount) {
 		super();
 		particleCount = aParticleCount;
-	}
-
-	/**
-	 * Initializes the particle system.
-	 */
-	public void initializeParticleSystem(){
-		coordinates = new float[particleCount * 3];
-		colors = new float[particleCount * 3];
 		
-		for (int i = 0; i < particleCount * 3; i = i + 3) {
-			setParticle(i);
+		coordinates = new float[aParticleCount * 3];
+		colors = new float[aParticleCount * 3];
+		
+		Random rand = new Random();
+		//TODO: Init Algorithm
+		for (int i = 0; i < particleCount*3; i += 3) {
+			coordinates[i] = rand.nextInt(particleCount*2) - particleCount;
+			coordinates[i + 1] = rand.nextInt(particleCount*2) - particleCount;
+			coordinates[i + 2] = rand.nextInt(particleCount*2) - particleCount;
+
+			colors[i] = 0.8f;
+			colors[i + 1] = 0.8f;
+			colors[i + 2] = 0.8f;
 		}
-
-	}
-	
-	//TODO: Implement with algorithms
-	public void setParticle(int aPos) {
-		coordinates[aPos] = (float) Math.random();
-		coordinates[aPos + 1] = (float) Math.random();
-		coordinates[aPos + 2] = (float) Math.random();
-
-		colors[aPos] = 0.8f;
-		colors[aPos + 1] = 0.8f;
-		colors[aPos + 2] = 0.8f;
 	}
 
-	//TODO: Implement with algorithms
-	public void updateParticle(int aPos){
-		//DO some update stuff -> formula
-	}
-	
 	/**
 	 * @return the particleCount
 	 */
@@ -79,15 +66,37 @@ public class BaseParticleSystem implements Serializable {
 	}
 
 	/**
+	 * @param coordinates the coordinates to set
+	 */
+	public void setCoordinates(float[] coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	/**
+	 * @param colors the colors to set
+	 */
+	public void setColors(float[] colors) {
+		this.colors = colors;
+	}
+
+	/**
 	 * @return the colors
 	 */
 	public float[] getColors() {
 		return colors;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
+	public BaseParticleSystem clone() throws CloneNotSupportedException {
+		BaseParticleSystem clonePs = (BaseParticleSystem) super.clone();
 
-	public void invokeUpdate() {
-		for (int i = 0; i < particleCount * 3; i = i + 3) {
-			setParticle(i);
-		}
+		clonePs.particleCount = particleCount;
+		clonePs.coordinates = coordinates.clone();
+		clonePs.colors = colors.clone();
+		
+		return clonePs;
 	}
 }
+
