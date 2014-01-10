@@ -1,19 +1,18 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps.core.alg;
+package ch.zhaw.da.thb.ps.math.simu;
 
 import java.util.Random;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.itf.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
  * 
  *         Concrete Implementation of a simulation algorithm.
  */
-public class MovingExampleAlgorithm implements SimulationAlgorithm {
+public class RandomExampleAlgorithm implements SimulationAlgorithm {
 
 	private int lowerBound;
 	private int upperBound;
@@ -28,7 +27,7 @@ public class MovingExampleAlgorithm implements SimulationAlgorithm {
 	/**
 	 * Creates a new instance of this class.
 	 */
-	public MovingExampleAlgorithm() {
+	public RandomExampleAlgorithm() {
 		running = false;
 		
 		rand = new Random();
@@ -72,7 +71,7 @@ public class MovingExampleAlgorithm implements SimulationAlgorithm {
 
 	@Override
 	public SimulationAlgorithm copy() {
-		MovingExampleAlgorithm simuAlg = new MovingExampleAlgorithm();
+		RandomExampleAlgorithm simuAlg = new RandomExampleAlgorithm();
 
 		simuAlg.lastPs = lastPs;
 		simuAlg.resultPs = resultPs;
@@ -93,15 +92,25 @@ public class MovingExampleAlgorithm implements SimulationAlgorithm {
 				e.printStackTrace();
 			}
 
-			for (int i = lowerBound; i < upperBound; i ++) {
-				resultPs.getCoordinates()[i] = resultPs.getCoordinates()[i] + 10.0f;
+			for (int i = lowerBound; i < upperBound; i += 3) {
+				resultPs.getCoordinates()[i] = rand.nextInt(1000) - 500;
+				resultPs.getCoordinates()[i + 1] = rand.nextInt(1000) - 500;
+				resultPs.getCoordinates()[i + 2] = rand.nextInt(1000) - 500;
 
 				resultPs.getColors()[i] = 0.8f;
-				
-				if(resultPs.getCoordinates()[i] > 500){
-					resultPs.getCoordinates()[i] = 0;
-				}
+				resultPs.getColors()[i + 1] = 0.8f;
+				resultPs.getColors()[i + 2] = 0.8f;
 			}
+			
+//			for (int i = lowerBound; i < upperBound; i += 3) {
+//				resultPs.getCoordinates()[i] = resultPs.getCoordinates()[i] + 0.1f;
+//				resultPs.getCoordinates()[i + 1] = resultPs.getCoordinates()[i+ 1] + 0.1f;
+//				resultPs.getCoordinates()[i + 2] = resultPs.getCoordinates()[i + 2] + 0.1f;
+//
+//				resultPs.getColors()[i] = 0.8f;
+//				resultPs.getColors()[i + 1] = 0.8f;
+//				resultPs.getColors()[i + 2] = 0.8f;
+//			}
 			running = false;
 		}
 		return this;

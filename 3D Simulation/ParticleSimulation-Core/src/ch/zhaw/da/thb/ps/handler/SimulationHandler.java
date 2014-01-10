@@ -3,7 +3,7 @@
  */
 package ch.zhaw.da.thb.ps.handler;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun

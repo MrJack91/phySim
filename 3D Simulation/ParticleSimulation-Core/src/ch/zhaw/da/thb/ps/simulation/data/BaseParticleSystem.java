@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps;
+package ch.zhaw.da.thb.ps.simulation.data;
 
 import java.io.Serializable;
 import java.util.Random;

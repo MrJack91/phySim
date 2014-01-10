@@ -4,11 +4,11 @@
 package ch.zhaw.da.thb.ps;
 
 import ch.zhaw.da.thb.ps.graphic.SimulationGUI;
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.LocalCalculationHandler;
-import ch.zhaw.da.zhb.ps.core.alg.MovingExampleAlgorithm;
-import ch.zhaw.da.zhb.ps.core.alg.RandomExampleAlgorithm;
-import ch.zhaw.da.zhb.ps.core.itf.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.MovingExampleAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.SimulationServer;
+import ch.zhaw.da.thb.ps.simulation.calculation.LocalCalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
