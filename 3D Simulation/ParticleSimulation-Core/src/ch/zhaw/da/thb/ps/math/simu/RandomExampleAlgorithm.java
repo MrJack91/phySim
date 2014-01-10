@@ -3,9 +3,9 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
-import java.util.Random;
-
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import java.util.Random;
 
 /**
  * @author Daniel Brun
@@ -125,5 +125,10 @@ public class RandomExampleAlgorithm implements SimulationAlgorithm {
 	public int getLowerBound() {
 		return lowerBound;
 	}
+
+    @Override
+    public void setConfiguration(String mode) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 }

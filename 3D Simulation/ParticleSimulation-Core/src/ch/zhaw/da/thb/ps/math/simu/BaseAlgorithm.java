@@ -70,9 +70,6 @@ public abstract class BaseAlgorithm implements SimulationAlgorithm {
 	}
 
 	@Override
-	public abstract SimulationAlgorithm call() throws Exception;
-
-	@Override
 	public int getUpperBound() {
 		return upperBound;
 	}
@@ -89,6 +86,8 @@ public abstract class BaseAlgorithm implements SimulationAlgorithm {
      */
     protected void trackParticle(int i, int trackIndex) {
         if (i == trackIndex) {
+
+
             System.out.println(
                     "(" + resultPs.getCoordinates()[i] + ", " + resultPs.getCoordinates()[i+1] + ", " + resultPs.getCoordinates()[i+2] + ")"
             );

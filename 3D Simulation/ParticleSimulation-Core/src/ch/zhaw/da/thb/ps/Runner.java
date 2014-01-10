@@ -33,6 +33,7 @@ public class Runner {
 
 
         SimulationAlgorithm simuAlg = new GravityAlgorithm();
+        // simuAlg.setConfiguration("cube");
         // SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
         // SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
         // SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();

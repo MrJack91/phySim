@@ -3,9 +3,9 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
-import java.util.concurrent.Callable;
-
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import java.util.concurrent.Callable;
 
 /**
  * @author Daniel Brun
@@ -54,4 +54,8 @@ public interface SimulationAlgorithm extends Callable<SimulationAlgorithm> {
 	 * @return The lower bound.
 	 */
 	public int getLowerBound();
+
+    public void setConfiguration(String mode);
+
+    public SimulationAlgorithm call() throws Exception;
 }
