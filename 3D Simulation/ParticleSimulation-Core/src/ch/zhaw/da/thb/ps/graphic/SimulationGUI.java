@@ -3,24 +3,17 @@
  */
 package ch.zhaw.da.thb.ps.graphic;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.swing.JFrame;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3f;
-
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
-
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+
+import javax.media.j3d.*;
+import javax.swing.*;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3f;
+import java.awt.*;
 
 /**
  * @author Daniel Brun
@@ -86,8 +79,7 @@ public class SimulationGUI extends JFrame {
 		SimpleUniverse u = new SimpleUniverse(canvas);
 
 		OrbitBehavior ob = new OrbitBehavior(canvas);
-		ob.setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
-				Double.MAX_VALUE));
+		ob.setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0), Double.MAX_VALUE));
 		u.getViewingPlatform().setViewPlatformBehavior(ob);
 
 		// Set default View
