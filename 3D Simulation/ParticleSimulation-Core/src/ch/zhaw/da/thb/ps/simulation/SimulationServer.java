@@ -76,16 +76,18 @@ public class SimulationServer implements SimulationHandler, Runnable {
 			int loadPerScore = lastParticleSystem.getParticleCount() / totalScore;
 			int lastIndex = 0;
 
+            //
 			for (CalculationHandler handler : calcHandlers) {
 				// Set calculation bounds
 				int range = handler.getScore() * loadPerScore * 3;
 				int upperBounds = lastIndex + range;
 
-				if (upperBounds >= (lastParticleSystem.getParticleCount() * 3)) {
+				if (upperBounds > (lastParticleSystem.getParticleCount() * 3)) {
 					upperBounds = lastParticleSystem.getParticleCount() * 3;
 				}
 
 				handler.setCalculationBounds(lastIndex, upperBounds);
+
 				lastIndex = upperBounds;
 			}
 
@@ -96,14 +98,12 @@ public class SimulationServer implements SimulationHandler, Runnable {
 					for (CalculationHandler handler : calcHandlers) {
 						// Set last data
 						handler.setLastParticleSystem(lastParticleSystem);
-
 					}
 					
 					List<Future<CalculationHandler>> results = executor.invokeAll(calcHandlers);
 					
 					// Get and merge results
-					BaseParticleSystem newParticleSystem = lastParticleSystem
-							.clone();
+					BaseParticleSystem newParticleSystem = lastParticleSystem.clone();
 					boolean finished = false;
 					
 					while(!finished){

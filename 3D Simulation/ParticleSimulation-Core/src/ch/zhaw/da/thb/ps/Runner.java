@@ -32,6 +32,7 @@ public class Runner {
 		BaseParticleSystem basePs = new BaseParticleSystem(10000);
 
 
+
         /*
         SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
         simuAlg.setConfiguration("cube");

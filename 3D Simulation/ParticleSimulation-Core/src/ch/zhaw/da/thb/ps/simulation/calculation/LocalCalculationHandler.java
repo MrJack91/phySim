@@ -41,8 +41,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 	 */
 	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm) {
 
-		// Calculate score (Cpu multiple 3 -> 3d coordinatesystem)
-		score = 3 * Runtime.getRuntime().availableProcessors();
+		score = Runtime.getRuntime().availableProcessors();
 
 		executor = Executors.newFixedThreadPool(score);
 
@@ -89,11 +88,9 @@ public class LocalCalculationHandler implements CalculationHandler {
 				for (SimulationAlgorithm simuAlg : simAlgorithms) {
 					// Set last data
 					simuAlg.setLastParticleSystem(lastPs);
-
 				}
 
-				List<Future<SimulationAlgorithm>> results = executor
-						.invokeAll(simAlgorithms);
+				List<Future<SimulationAlgorithm>> results = executor.invokeAll(simAlgorithms);
 
 				// Get and merge results
 				BaseParticleSystem newParticleSystem = lastPs.clone();
