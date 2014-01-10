@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.zhaw.da.thb.ps;
+package ch.zhaw.da.thb.ps.simulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.itf.CalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.calculation.CalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
@@ -57,13 +57,6 @@ public class SimulationServer implements SimulationHandler, Runnable {
 
 		if (!systemQueue.isEmpty()) {
 			currentDisplayedPs = systemQueue.remove();
-//			for(int i = 0;i < aParticleSystem.getParticleCount()*3;i++){
-//				aParticleSystem.getCoordinates()[i] = aParticleSystem.getCoordinates()[i]+ 0.1f;
-//				//colors[i] = 0.8f;
-//			}
-			
-//			mergeArray(aParticleSystem.getCoordinates(),newParticleSystem.getCoordinates(),0,aParticleSystem.getParticleCount()*3);
-//			mergeArray(aParticleSystem.getColors(),newParticleSystem.getColors(),0,aParticleSystem.getParticleCount()*3);
 		}
 
 		return currentDisplayedPs;

@@ -1,12 +1,11 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps.core.alg;
+package ch.zhaw.da.thb.ps.math.simu;
 
 import java.util.Random;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.itf.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
@@ -96,9 +95,9 @@ public class MovingExampleAlgorithm implements SimulationAlgorithm {
 			for (int i = lowerBound; i < upperBound; i ++) {
 				resultPs.getCoordinates()[i] = resultPs.getCoordinates()[i] + 10.0f;
 
-				resultPs.getColors()[i] = 0.8f;
+				//resultPs.getColors()[i] = 0.8f;
 				
-				if(resultPs.getCoordinates()[i] > 500){
+				if(resultPs.getCoordinates()[i] > lastPs.getParticleCount()){
 					resultPs.getCoordinates()[i] = 0;
 				}
 			}

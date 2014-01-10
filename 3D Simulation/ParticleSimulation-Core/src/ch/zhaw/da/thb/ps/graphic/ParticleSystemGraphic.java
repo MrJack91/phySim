@@ -9,7 +9,7 @@ import javax.media.j3d.PointArray;
 import javax.media.j3d.PointAttributes;
 import javax.media.j3d.Shape3D;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun

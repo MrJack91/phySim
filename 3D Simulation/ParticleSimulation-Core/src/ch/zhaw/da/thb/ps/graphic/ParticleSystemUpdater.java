@@ -7,7 +7,7 @@ import javax.media.j3d.Geometry;
 import javax.media.j3d.GeometryUpdater;
 
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun

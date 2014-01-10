@@ -1,12 +1,11 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps.core.alg;
+package ch.zhaw.da.thb.ps.math.simu;
 
 import java.util.Random;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.itf.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun

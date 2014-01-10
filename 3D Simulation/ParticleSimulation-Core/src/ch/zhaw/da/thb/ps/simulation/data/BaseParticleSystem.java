@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps;
+package ch.zhaw.da.thb.ps.simulation.data;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -37,18 +37,7 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		
 		coordinates = new float[aParticleCount * 3];
 		colors = new float[aParticleCount * 3];
-		
-		Random rand = new Random();
-		//TODO: Init Algorithm
-		for (int i = 0; i < particleCount*3; i += 3) {
-			coordinates[i] = rand.nextInt(particleCount*2) - particleCount;
-			coordinates[i + 1] = rand.nextInt(particleCount*2) - particleCount;
-			coordinates[i + 2] = rand.nextInt(particleCount*2) - particleCount;
 
-			colors[i] = 0.8f;
-			colors[i + 1] = 0.8f;
-			colors[i + 2] = 0.8f;
-		}
 	}
 
 	/**

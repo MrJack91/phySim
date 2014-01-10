@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.zhaw.da.zhb.ps.core;
+package ch.zhaw.da.thb.ps.simulation.calculation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
-import ch.zhaw.da.zhb.ps.core.itf.CalculationHandler;
-import ch.zhaw.da.zhb.ps.core.itf.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun

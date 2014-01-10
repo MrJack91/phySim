@@ -16,7 +16,7 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
 
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
-import ch.zhaw.da.zhb.ps.BaseParticleSystem;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
@@ -94,7 +94,7 @@ public class SimulationGUI extends JFrame {
 		u.getViewingPlatform().setNominalViewingTransform();
 		u.getViewer().getView().setFrontClipDistance(0.1);
 		u.getViewer().getView().setBackClipDistance(25000.0);//TODO: Dep. from init-size
-
+		
 		//Move view;
 		TransformGroup viewTGroup = u.getViewingPlatform().getMultiTransformGroup().getTransformGroup(0);
 		Transform3D viewMove = new Transform3D();
