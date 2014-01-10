@@ -3,15 +3,15 @@
  */
 package ch.zhaw.da.thb.ps.simulation.calculation;
 
+import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
-import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
@@ -41,8 +41,8 @@ public class LocalCalculationHandler implements CalculationHandler {
 	 */
 	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm) {
 
-		// Calculate score
-		score = Runtime.getRuntime().availableProcessors();
+		// Calculate score (Cpu multiple 3 -> 3d coordinatesystem)
+		score = 3 * Runtime.getRuntime().availableProcessors();
 
 		executor = Executors.newFixedThreadPool(score);
 

@@ -44,7 +44,6 @@ public abstract class BaseAlgorithm implements SimulationAlgorithm {
 	public void setCalculationBounds(int aLowerBound, int anUpperBound) {
 		lowerBound = aLowerBound;
 		upperBound = anUpperBound;
-
 	}
 
 	/*
@@ -86,8 +85,6 @@ public abstract class BaseAlgorithm implements SimulationAlgorithm {
      */
     protected void trackParticle(int i, int trackIndex) {
         if (i == trackIndex) {
-
-
             System.out.println(
                     "(" + resultPs.getCoordinates()[i] + ", " + resultPs.getCoordinates()[i+1] + ", " + resultPs.getCoordinates()[i+2] + ")"
             );

@@ -3,18 +3,14 @@
  */
 package ch.zhaw.da.thb.ps.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
 import ch.zhaw.da.thb.ps.simulation.calculation.CalculationHandler;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.*;
 
 /**
  * @author Daniel Brun
@@ -77,8 +73,7 @@ public class SimulationServer implements SimulationHandler, Runnable {
 
 			executor = Executors.newFixedThreadPool(calcHandlers.size());
 
-			int loadPerScore = lastParticleSystem.getParticleCount()
-					/ totalScore;
+			int loadPerScore = lastParticleSystem.getParticleCount() / totalScore;
 			int lastIndex = 0;
 
 			for (CalculationHandler handler : calcHandlers) {
