@@ -95,7 +95,7 @@ public class MovingExampleAlgorithm implements SimulationAlgorithm {
 			for (int i = lowerBound; i < upperBound; i ++) {
 				resultPs.getCoordinates()[i] = resultPs.getCoordinates()[i] + 10.0f;
 
-				resultPs.getColors()[i] = 0.8f;
+				//resultPs.getColors()[i] = 0.8f;
 				
 				if(resultPs.getCoordinates()[i] > lastPs.getParticleCount()){
 					resultPs.getCoordinates()[i] = 0;

@@ -4,6 +4,8 @@
 package ch.zhaw.da.thb.ps;
 
 import ch.zhaw.da.thb.ps.graphic.SimulationGUI;
+import ch.zhaw.da.thb.ps.math.init.ParticleInitializeAlgorithm;
+import ch.zhaw.da.thb.ps.math.init.RandomParticleIniAlgImpl;
 import ch.zhaw.da.thb.ps.math.simu.MovingExampleAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationServer;
@@ -29,6 +31,9 @@ public class Runner {
 		//TODO: Should be started from Simulation-Control-GUI
 		BaseParticleSystem basePs = new BaseParticleSystem(10000);
 		SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
+		ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
+		
+		initAlg.initializeSystem(basePs);
 		
 		//Start Simulator 
 		SimulationServer simuServer = new SimulationServer();

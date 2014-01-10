@@ -57,13 +57,6 @@ public class SimulationServer implements SimulationHandler, Runnable {
 
 		if (!systemQueue.isEmpty()) {
 			currentDisplayedPs = systemQueue.remove();
-//			for(int i = 0;i < aParticleSystem.getParticleCount()*3;i++){
-//				aParticleSystem.getCoordinates()[i] = aParticleSystem.getCoordinates()[i]+ 0.1f;
-//				//colors[i] = 0.8f;
-//			}
-			
-//			mergeArray(aParticleSystem.getCoordinates(),newParticleSystem.getCoordinates(),0,aParticleSystem.getParticleCount()*3);
-//			mergeArray(aParticleSystem.getColors(),newParticleSystem.getColors(),0,aParticleSystem.getParticleCount()*3);
 		}
 
 		return currentDisplayedPs;
