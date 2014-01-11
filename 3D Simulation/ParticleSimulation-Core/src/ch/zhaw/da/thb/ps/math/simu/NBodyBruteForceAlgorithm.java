@@ -3,14 +3,17 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
-import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
-
+import java.awt.Color;
 import java.util.Random;
+
+import javax.vecmath.Color3f;
+
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
  * 
- * Implementation of a N-Body Brute-Force Algorithm.
+ *         Implementation of a N-Body Brute-Force Algorithm.
  */
 public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 
@@ -22,15 +25,11 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 
 	private boolean running;
 
-	
-	private Random rand;
 	/**
 	 * Creates a new instance of this class.
 	 */
 	public NBodyBruteForceAlgorithm() {
 		running = false;
-		
-		rand = new Random();
 	}
 
 	/*
@@ -92,49 +91,87 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 				e.printStackTrace();
 			}
 
-			//Gravitational Constant
-			float g = 667384 * 10^-11;
-			float softeningFactor = 1; //Wert???
+			Color3f color3f = new Color3f();
 			
-			//FIXME: Calculation goes here
-			//Concrete Algorithm & Code: http://http.developer.nvidia.com/GPUGems3/gpugems3_ch31.html
-			//Concrete & Simple: http://physics.princeton.edu/~fpretori/Nbody/intro.htm
-			//http://catdir.loc.gov/catdir/samples/cam041/2003046028.pdf
-			//http://www.cs.hut.fi/~ctl/NBody.pdf
-			//Complex: https://spaces.seas.harvard.edu/download/attachments/11043272/ipdps2013_camera.pdf
-			//Example: http://www.ids.ias.edu/~piet/act/comp/algorithms/starter/
-			//Sample code: http://www.browndeertechnology.com/docs/BDT_OpenCL_Tutorial_NBody-rev3.html
-			
-			
-			//http://www.ids.ias.edu/~piet/act/comp/algorithms/starter/nbody_sh1.html
-			
-			//CODE!!!: http://physics.princeton.edu/~fpretori/Nbody/code.htm
-			//Loop over each particle in the given boundaries
+			// Gravitational Constant
+			float g = (float) (667384 * Math.pow(10, -11));
+			float softeningFactor = (float)Math.pow(100,-10); 
 
-			for (int i = lowerBound,iRealCounter = 0; i < upperBound; i +=3, iRealCounter++) {
+			// FIXME: Calculation goes here
+			// Concrete Algorithm & Code:
+			// http://http.developer.nvidia.com/GPUGems3/gpugems3_ch31.html
+			// Concrete & Simple:
+			// http://physics.princeton.edu/~fpretori/Nbody/intro.htm
+			// http://catdir.loc.gov/catdir/samples/cam041/2003046028.pdf
+			// http://www.cs.hut.fi/~ctl/NBody.pdf
+			// Complex:
+			// https://spaces.seas.harvard.edu/download/attachments/11043272/ipdps2013_camera.pdf
+			// Example:
+			// http://www.ids.ias.edu/~piet/act/comp/algorithms/starter/
+			// Sample code:
+			// http://www.browndeertechnology.com/docs/BDT_OpenCL_Tutorial_NBody-rev3.html
+
+			// http://www.ids.ias.edu/~piet/act/comp/algorithms/starter/nbody_sh1.html
+
+			// CODE!!!: http://physics.princeton.edu/~fpretori/Nbody/code.htm
+			// Loop over each particle in the given boundaries
+
+			for (int i = lowerBound; i < upperBound; i += 3) {
 				float summ = 0;
-				float yMass = 1;
-				
-				//Loop over the last particle system and calculate each dependency
-				for (int x = 0, xRealCounter = 0; x < lastPs.getParticleCount()*3; x +=3,xRealCounter++) {
+
+				// Loop over the last particle system and calculate each
+				// dependency
+				for (int x = 0; x < lastPs.getParticleCount() * 3; x += 3) {
+					float distance = (float) Math
+							.sqrt(Math.pow(
+									lastPs.getCoordinates()[i]
+											- lastPs.getCoordinates()[x], 2)
+									+ Math.pow(lastPs.getCoordinates()[i + 1]
+											- lastPs.getCoordinates()[x + 1], 2)
+									+ Math.pow(lastPs.getCoordinates()[i + 1]
+											- lastPs.getCoordinates()[x + 1], 2));
+
 					float partial = 0;
-					float xMass = 1;
-					float r = 0; //???? r ij = x j - x i is the vector from body i to body j;
-					float vec = 0; //????
-					
-					//Calculate
-					partial =  ((xMass * r) / (float) Math.pow(vec + Math.pow(softeningFactor, 2),(3/2)));
-					
+					float xMass = 1000;
+
+					// Calculate
+					partial = ((xMass * distance) / (float) Math.pow(
+							Math.pow(distance, 2)
+									+ Math.pow(softeningFactor, 2), (3 / 2)));
+
 					summ = summ + partial;
 				}
-				
+
 				float acceleration = g * summ;
+
+				// Calculate position
+
+				for (int y = i; y <= (i + 3); y++) {
+					int sign = (int) Math.signum(lastPs.getCoordinates()[y]);
+					float nextPos = lastPs.getCoordinates()[y] - (sign * (float) acceleration * 60);
+					resultPs.getCoordinates()[y] = nextPos;
+				}
 				
-				//Calculate position
+				int red = (int) (17 + 4 * acceleration * 1000) ;
+				int green = 209 ;
 				
-				//resultPs.getCoordinates()[i] = 0;
+				if(red >= 209){
+					red = 209;
+					green = (int) (209 - 3 *acceleration * 100);
+				}
+				
+				if(green <= 17){
+					green = 17;
+				}
+				
+				Color color = new Color(red, green, 17);
+				color3f.set(color);
+				
+				resultPs.getColors()[i] = color3f.x;
+				resultPs.getColors()[i+1] = color3f.y;
+				resultPs.getColors()[i+2] = color3f.z;
 			}
-			
+
 			running = false;
 		}
 		return this;
@@ -150,9 +187,10 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 		return lowerBound;
 	}
 
-    @Override
-    public void setConfiguration(String mode) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public void setConfiguration(String mode) {
+		// To change body of implemented methods use File | Settings | File
+		// Templates.
+	}
 
 }

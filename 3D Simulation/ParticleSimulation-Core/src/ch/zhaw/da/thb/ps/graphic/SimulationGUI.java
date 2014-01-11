@@ -85,14 +85,14 @@ public class SimulationGUI extends JFrame {
 		// Set default View
 		u.getViewingPlatform().setNominalViewingTransform();
 		u.getViewer().getView().setFrontClipDistance(0.1);
-		u.getViewer().getView().setBackClipDistance(25000.0);//TODO: Dep. from init-size
+		u.getViewer().getView().setBackClipDistance(particleSystem.getParticleCount()*4);//TODO: Dep. from init-size, 25000.0
 		
 		//Move view;
 		TransformGroup viewTGroup = u.getViewingPlatform().getMultiTransformGroup().getTransformGroup(0);
 		Transform3D viewMove = new Transform3D();
 		
 		viewTGroup.getTransform(viewMove);
-		viewMove.setTranslation(new Vector3f(0.0f,0.0f,25000.0f)); //TODO: Dep. from init-size
+		viewMove.setTranslation(new Vector3f(0.0f,0.0f,particleSystem.getParticleCount()*4)); //TODO: Dep. from init-size, 25000.0
 		viewTGroup.setTransform(viewMove);
 		
 		// Add graph to universe
@@ -115,7 +115,7 @@ public class SimulationGUI extends JFrame {
 				psGraphic);
 
 		// TODO: According to init size
-		BoundingSphere sphere = new BoundingSphere(new Point3d(0, 0, 0), 25000); //TODO: Dep. from init-size
+		BoundingSphere sphere = new BoundingSphere(new Point3d(0, 0, 0), particleSystem.getParticleCount()*4); //TODO: Dep. from init-size, 25.000
 		psControler.setSchedulingBounds(sphere);
 
 		TransformGroup transGrp = new TransformGroup();

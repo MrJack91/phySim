@@ -68,12 +68,12 @@ public class LocalCalculationHandler implements CalculationHandler {
 		if (!running && lastPs != null) {
 			running = true;
 
-			int loadPerScore = (upperBounds - lowerBounds) / score;
+			int loadPerScore = (upperBounds - lowerBounds) / 3 / score;
 			int lastIndex = 0;
 
 			for (SimulationAlgorithm simuAlg : simAlgorithms) {
 				// Set calculation bounds
-				int simUpperBounds = lastIndex + loadPerScore;
+				int simUpperBounds = lastIndex + (loadPerScore*3);
 
 				if (simUpperBounds >= upperBounds) {
 					simUpperBounds = upperBounds;

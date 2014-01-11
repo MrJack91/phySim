@@ -79,11 +79,11 @@ public class SimulationServer implements SimulationHandler, Runnable {
             //
 			for (CalculationHandler handler : calcHandlers) {
 				// Set calculation bounds
-				int range = handler.getScore() * loadPerScore * 3;
-				int upperBounds = lastIndex + range;
+				int range = handler.getScore() * loadPerScore;
+				int upperBounds = lastIndex + (range*3);
 
-				if (upperBounds > (lastParticleSystem.getParticleCount() * 3)) {
-					upperBounds = lastParticleSystem.getParticleCount() * 3;
+				if (upperBounds > (lastParticleSystem.getParticleCount() * 3 - 1)) {
+					upperBounds = lastParticleSystem.getParticleCount() * 3 - 1;
 				}
 
 				handler.setCalculationBounds(lastIndex, upperBounds);
