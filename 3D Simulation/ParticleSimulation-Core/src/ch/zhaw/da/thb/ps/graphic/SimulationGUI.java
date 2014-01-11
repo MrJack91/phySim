@@ -3,17 +3,26 @@
  */
 package ch.zhaw.da.thb.ps.graphic;
 
-import ch.zhaw.da.thb.ps.handler.SimulationHandler;
-import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
-import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
-import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
-import com.sun.j3d.utils.universe.SimpleUniverse;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.media.j3d.*;
-import javax.swing.*;
+import javax.media.j3d.BoundingSphere;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
+import javax.swing.JFrame;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
-import java.awt.*;
+
+import ch.zhaw.da.thb.ps.handler.SimulationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import com.sun.j3d.utils.behaviors.mouse.MouseBehavior;
+import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
+import com.sun.j3d.utils.behaviors.mouse.MouseWheelZoom;
+import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
+import com.sun.j3d.utils.universe.SimpleUniverse;
 
 /**
  * @author Daniel Brun
@@ -79,21 +88,36 @@ public class SimulationGUI extends JFrame {
 		SimpleUniverse u = new SimpleUniverse(canvas);
 
 		OrbitBehavior ob = new OrbitBehavior(canvas);
-		ob.setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0), Double.MAX_VALUE));
+		ob.setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
+				Double.MAX_VALUE));
 		u.getViewingPlatform().setViewPlatformBehavior(ob);
 
 		// Set default View
 		u.getViewingPlatform().setNominalViewingTransform();
 		u.getViewer().getView().setFrontClipDistance(0.1);
-		u.getViewer().getView().setBackClipDistance(particleSystem.getParticleCount()*4);//TODO: Dep. from init-size, 25000.0
-		
-		//Move view;
-		TransformGroup viewTGroup = u.getViewingPlatform().getMultiTransformGroup().getTransformGroup(0);
+		u.getViewer().getView()
+				.setBackClipDistance(particleSystem.getParticleCount() * 5);// TODO:
+																			// Dep.
+																			// from
+																			// init-size,
+																			// 25000.0
+		// Move view;
+		TransformGroup viewTGroup = u.getViewingPlatform()
+				.getMultiTransformGroup().getTransformGroup(0);
 		Transform3D viewMove = new Transform3D();
-		
+
 		viewTGroup.getTransform(viewMove);
-		viewMove.setTranslation(new Vector3f(0.0f,0.0f,particleSystem.getParticleCount()*4)); //TODO: Dep. from init-size, 25000.0
+		viewMove.setTranslation(new Vector3f(0.0f, 0.0f, particleSystem
+				.getParticleCount() * 5)); // TODO: Dep. from init-size, 25000.0
 		viewTGroup.setTransform(viewMove);
+
+		MouseWheelZoom mwz = new MouseWheelZoom(MouseBehavior.INVERT_INPUT);
+		mwz.setTransformGroup(u.getViewingPlatform()
+				.getViewPlatformTransform());
+		mwz.setSchedulingBounds(new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
+				Double.MAX_VALUE));
+		mwz.setFactor(50.0);
+		sceneGraph.addChild(mwz);
 		
 		// Add graph to universe
 		u.addBranchGraph(sceneGraph);
@@ -115,7 +139,9 @@ public class SimulationGUI extends JFrame {
 				psGraphic);
 
 		// TODO: According to init size
-		BoundingSphere sphere = new BoundingSphere(new Point3d(0, 0, 0), particleSystem.getParticleCount()*4); //TODO: Dep. from init-size, 25.000
+		BoundingSphere sphere = new BoundingSphere(new Point3d(0, 0, 0),
+				particleSystem.getParticleCount() * 5); // TODO: Dep. from
+														// init-size, 25.000
 		psControler.setSchedulingBounds(sphere);
 
 		TransformGroup transGrp = new TransformGroup();
