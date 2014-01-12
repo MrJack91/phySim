@@ -68,7 +68,14 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 // this.trackParticle(i, 26664);
             }
 
-            // System.out.println(this.baseCountAdditional);
+            // save
+            // FIXME: Number 4 should be equal to threads
+
+            this.baseCountInit += 4 * this.baseCountAdditional;
+            this.baseCountAdditional = 0;
+
+            // System.out.println(this.baseCountInit);
+
 
             running = false;
         }
@@ -83,18 +90,16 @@ public class GravityAlgorithm extends BaseAlgorithm {
     private void calcNextCord(int i) {
         double curSpeed, radiusQuad, radius;
 
-        float currentCor = resultPs.getCoordinates()[i];
-
         float corX = resultPs.getCoordinates()[i];
         float corY = resultPs.getCoordinates()[i+1];
         float corZ = resultPs.getCoordinates()[i+2];
 
+        // calc radius to center
         radiusQuad = Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2);
         radius = Math.sqrt(radiusQuad);
 
         // is point not in base, save next position
         if (radius >= this.stopAt) {
-
             try {
                 // mass of center is baseCountInit, selfmass is 1
                 curSpeed = (double)this.frictionConst * this.gravityConst * (this.baseCountInit) / radiusQuad;
@@ -114,17 +119,20 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 */
                     // System.out.println("i:\t\t\t\t\t" + i);
 
-                /*
+
                 System.out.println("corX:\t\t\t\t" + corX);
                 System.out.println("corY:\t\t\t\t" + corY);
                 System.out.println("corZ:\t\t\t\t" + corZ);
                 System.out.println("corX^2:\t\t\t\t" + Math.pow(corX, 2));
                 System.out.println("corY^2:\t\t\t\t" + Math.pow(corY, 2));
                 System.out.println("corZ^2:\t\t\t\t" + Math.pow(corZ, 2));
-                System.out.println("r^2:\t\t\t\t" + (Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2)));
+                System.out.println("radius^2:\t\t\t" + (Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2)));
+                System.out.println("radius:\t\t\t\t" + (radius));
                 System.out.println("curSpeed:\t\t\t" + curSpeed);
                 System.out.println();
-                */
+
+
+
             }
 
             // set next point
@@ -134,7 +142,21 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
                 // calc next
                 int sign = (int) Math.signum(corTemp);
+
+
+                /*
+                    fixme: use Strahlensatz for regular speed allocation
+                    cBase   = y | x
+                    c       = b | a
+                 */
                 float corNext = corTemp - (sign * (float)curSpeed);
+
+                // fixme: stop at good place -> radius must be <= this.stopAt (1000)
+                // if the sign is switching, stop the particle at stopAt
+                if ((int)Math.signum(corNext) != sign) {
+                    // calc random pos..
+                    corNext = sign * this.rand.nextInt(this.stopAt);
+                }
 
                 // save for base index count calculation
                 switch (n-i) {
@@ -173,7 +195,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
         } else {
             this.stopAt = 1000;
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
-            this.gravityConst = 6.673 * Math.pow(10, 8);
+            this.gravityConst = 6.673 * Math.pow(10, 6);
             this.frictionConst = 0.18;
         }
     }
