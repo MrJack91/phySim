@@ -4,6 +4,7 @@
 package ch.zhaw.da.thb.ps.simulation.calculation;
 
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.concurrent.Future;
 /**
  * @author Daniel Brun
  * 
+ *         Local calculation handler
  */
 public class LocalCalculationHandler implements CalculationHandler {
 
@@ -33,19 +35,27 @@ public class LocalCalculationHandler implements CalculationHandler {
 
 	private List<SimulationAlgorithm> simAlgorithms;
 
+	private SimulationConfig config;
+
 	/**
 	 * Creates a new instance of this class
 	 * 
 	 * @param aSimulationAlgorithm
 	 *            The algorithm which should be used for simulation.
 	 */
-	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm) {
+	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm, SimulationConfig aConfig) {
 
-        // use a 3er numer s
-		score = Runtime.getRuntime().availableProcessors();
-        score += 3 - (score % 3);
+		if (aConfig.isUseMultiCore()) {
+            // use a 3er numer s
+            score = Runtime.getRuntime().availableProcessors();
+            score += 3 - (score % 3);
+		} else {
+			score = 1;
+		}
 
 		executor = Executors.newFixedThreadPool(score);
+
+		config = aConfig;
 
 		simAlgorithms = new ArrayList<SimulationAlgorithm>();
 
@@ -98,7 +108,8 @@ public class LocalCalculationHandler implements CalculationHandler {
 					simuAlg.setLastParticleSystem(lastPs);
 				}
 
-				List<Future<SimulationAlgorithm>> results = executor.invokeAll(simAlgorithms);
+				List<Future<SimulationAlgorithm>> results = executor
+						.invokeAll(simAlgorithms);
 
 				// Get and merge results
 				BaseParticleSystem newParticleSystem = lastPs.clone();
@@ -107,7 +118,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 				while (!finished) {
 					finished = true;
 
-					for(int i = 0;i < results.size();i++){
+					for (int i = 0; i < results.size(); i++) {
 						Future<SimulationAlgorithm> future = results.get(i);
 						if (future.isDone()) {
 							SimulationAlgorithm simuAlg = future.get();
@@ -131,7 +142,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 							finished = false;
 						}
 					}
-					Thread.sleep(20);
+					Thread.sleep(config.getServerSleepTime());
 				}
 
 				resultPs = newParticleSystem;

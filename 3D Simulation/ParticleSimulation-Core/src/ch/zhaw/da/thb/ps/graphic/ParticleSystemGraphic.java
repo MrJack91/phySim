@@ -65,7 +65,8 @@ public class ParticleSystemGraphic extends Shape3D {
 		
 		pointArray.setCoordRefFloat(particleSystem.getCoordinates());
 		pointArray.setColorRefFloat(particleSystem.getColors());
-
+		
+		
 		setGeometry(pointArray);
 	}
 	

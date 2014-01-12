@@ -3,19 +3,18 @@
  */
 package ch.zhaw.da.thb.ps;
 
-import ch.zhaw.da.thb.ps.graphic.SimulationGUI;
+import ch.zhaw.da.thb.SimulationStarter;
 import ch.zhaw.da.thb.ps.math.init.ParticleInitializeAlgorithm;
 import ch.zhaw.da.thb.ps.math.init.RandomParticleIniAlgImpl;
 import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
-import ch.zhaw.da.thb.ps.simulation.SimulationServer;
-import ch.zhaw.da.thb.ps.simulation.calculation.LocalCalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
  * 
- * Runs the Particle-Simulation-Core
+ *         Runs the Particle-Simulation-Core
  */
 public class Runner {
 
@@ -31,40 +30,26 @@ public class Runner {
 		//TODO: Should be started from Simulation-Control-GUI
 		BaseParticleSystem basePs = new BaseParticleSystem(100000);
 
+		// SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
+		// simuAlg.setConfiguration("cube");
 
+		// SimulationAlgorithm simuAlg = new GravityAlgorithm();
 
-        /*
-        SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
-        simuAlg.setConfiguration("cube");
-        */
-
-        SimulationAlgorithm simuAlg = new GravityAlgorithm();
-
-        // SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
-        // SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
-        // SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
-
-
+		// SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
+		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
+		// SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
+		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
 
 		ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
-		initAlg.initializeSystem(basePs);
-		
-		//Start Simulator 
-		SimulationServer simuServer = new SimulationServer();
-		
-		//Register Local-Handler
-		try {
-			simuServer.setLastParticleSystem(basePs.clone());
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		simuServer.registerHandler(new LocalCalculationHandler(simuAlg));
-		
-		Thread simuThread = new Thread(simuServer);
-		simuThread.start();
-		
-		//Start GUI
-		new SimulationGUI(basePs,simuServer,50);
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
+		SimulationAlgorithm simuAlg = new GravityAlgorithm();
+
+		SimulationConfig config = new SimulationConfig(true, 1000, 50, 5,
+				simuAlg, initAlg);
+
+		SimulationStarter starter = new SimulationStarter(config);
+		starter.start();
+
 	}
 
 	/**
