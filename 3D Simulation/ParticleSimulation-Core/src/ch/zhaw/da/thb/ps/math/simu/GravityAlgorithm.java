@@ -3,6 +3,8 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
+import javax.vecmath.Color3f;
+
 /**
  * @author Daniel Brun
  *
@@ -25,6 +27,8 @@ public class GravityAlgorithm extends BaseAlgorithm {
     private double gravityConst;
     private double frictionConst;
 
+    private Color3f color3f;
+
     /**
      * construct
      */
@@ -44,6 +48,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
         simuAlg.baseCountInit = baseCountInit;
         simuAlg.gravityConst = gravityConst;
         simuAlg.frictionConst = frictionConst;
+        simuAlg.color3f= color3f;
 
         return (BaseAlgorithm) simuAlg;
     }
@@ -59,8 +64,14 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 e.printStackTrace();
             }
 
+            Color3f color3f = new Color3f();
+
             // calc every cordinate
-            for (int i = lowerBound; i < upperBound; i = i + 3) {
+            for (int i = lowerBound; i <= upperBound; i = i + 3) {
+                if (i >= upperBound -6) {
+                    // System.out.println(i);
+                }
+
                 calcNextCord(i);
 
                 //resultPs.getColors()[i] = 0.8f;
@@ -73,9 +84,6 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
             this.baseCountInit += 4 * this.baseCountAdditional;
             this.baseCountAdditional = 0;
-
-            // System.out.println(this.baseCountInit);
-
 
             running = false;
         }
@@ -117,9 +125,9 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("gravityConst:\t\t" + this.gravityConst);
                 System.out.println("baseCountInit:\t\t" + this.baseCountInit);
                 */
-                    // System.out.println("i:\t\t\t\t\t" + i);
+                // System.out.println("i:\t\t\t\t\t" + i);
 
-
+                /*
                 System.out.println("corX:\t\t\t\t" + corX);
                 System.out.println("corY:\t\t\t\t" + corY);
                 System.out.println("corZ:\t\t\t\t" + corZ);
@@ -130,10 +138,20 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("radius:\t\t\t\t" + (radius));
                 System.out.println("curSpeed:\t\t\t" + curSpeed);
                 System.out.println();
-
+                */
 
 
             }
+
+            double nextRadius = radius - curSpeed;
+
+            // check the limit of move (at center)
+            if (nextRadius < this.stopAt) {
+                nextRadius = this.stopAt;
+                this.baseCountAdditional++;
+            }
+
+            double factor = this.getFactorFromRadius(nextRadius, resultPs.getCoordinates()[i], resultPs.getCoordinates()[i+1], resultPs.getCoordinates()[i+2]);
 
             // set next point
             for (int n = i; n <= i+2; n++) {
@@ -141,14 +159,9 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
 
                 // calc next
-                int sign = (int) Math.signum(corTemp);
-
+                float corNext = (float) (corTemp * factor);
 
                 /*
-                    fixme: use Strahlensatz for regular speed allocation
-                    cBase   = y | x
-                    c       = b | a
-                 */
                 float corNext = corTemp - (sign * (float)curSpeed);
 
                 // fixme: stop at good place -> radius must be <= this.stopAt (1000)
@@ -157,6 +170,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
                     // calc random pos..
                     corNext = sign * this.rand.nextInt(this.stopAt);
                 }
+                */
 
                 // save for base index count calculation
                 switch (n-i) {
@@ -172,8 +186,33 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 }
 
                 resultPs.getCoordinates()[n] = corNext;
+
+
+                /*
+                int red = (int) (17 + 4 * curSpeed * 10000) ;
+                int green = 209;
+
+                if(red >= 209){
+                    red = 209;
+                    green = (int) (209 - 3 * curSpeed * 1000);
+                }
+
+                if(green <= 17){
+                    green = 17;
+                }
+
+
+                Color color = new Color(red, green, 17);
+                color3f.set(color);
+
+                resultPs.getColors()[i] = color3f.x;
+                resultPs.getColors()[i+1] = color3f.y;
+                resultPs.getColors()[i+2] = color3f.z;
+                */
+
             }
 
+            /*
             // calc next radius
             radius = Math.sqrt(Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2));
             // if last time count it to the base
@@ -181,7 +220,21 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 // baseCountInit++;
                 this.baseCountAdditional++;
             }
+            */
         }
+    }
+
+    /**
+     * calcs the factor to get next coordiantes
+     * @param rad wished radius
+     * @param x x-val
+     * @param y y-val
+     * @param z z-val
+     * @return
+     */
+    public double getFactorFromRadius(double rad, double x, double y, double z) {
+        double factor = Math.pow(rad, 2) / (Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+        return factor;
     }
 
 
@@ -195,7 +248,9 @@ public class GravityAlgorithm extends BaseAlgorithm {
         } else {
             this.stopAt = 1000;
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
-            this.gravityConst = 6.673 * Math.pow(10, 6);
+            // this.gravityConst = 6.673 * Math.pow(10, 6);
+
+            this.gravityConst = 6.673 * Math.pow(10, 8);
             this.frictionConst = 0.18;
         }
     }

@@ -29,7 +29,7 @@ public class Runner {
 		
 		
 		//TODO: Should be started from Simulation-Control-GUI
-		BaseParticleSystem basePs = new BaseParticleSystem(10000);
+		BaseParticleSystem basePs = new BaseParticleSystem(100000);
 
 
 

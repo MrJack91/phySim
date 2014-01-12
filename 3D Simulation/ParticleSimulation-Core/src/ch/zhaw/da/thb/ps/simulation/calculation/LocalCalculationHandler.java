@@ -41,7 +41,9 @@ public class LocalCalculationHandler implements CalculationHandler {
 	 */
 	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm) {
 
+        // use a 3er numer s
 		score = Runtime.getRuntime().availableProcessors();
+        score += 3 - (score % 3);
 
 		executor = Executors.newFixedThreadPool(score);
 
@@ -73,11 +75,17 @@ public class LocalCalculationHandler implements CalculationHandler {
 
 			for (SimulationAlgorithm simuAlg : simAlgorithms) {
 				// Set calculation bounds
-				int simUpperBounds = lastIndex + (loadPerScore*3);
+				int simUpperBounds = lastIndex + (loadPerScore * 3);
 
 				if (simUpperBounds >= upperBounds) {
 					simUpperBounds = upperBounds;
 				}
+
+                /*
+                System.out.println("lastIndex:\n" + lastIndex);
+                System.out.println("simUpperBounds:\n" + simUpperBounds);
+                System.out.println();
+                */
 
 				simuAlg.setCalculationBounds(lastIndex, simUpperBounds);
 				lastIndex = simUpperBounds;
