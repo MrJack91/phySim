@@ -30,15 +30,20 @@ public class SimulationServer implements SimulationHandler, Runnable {
 	private BaseParticleSystem lastParticleSystem;
 
 	private BaseParticleSystem currentDisplayedPs;
+	
+	private SimulationConfig config;
+	
 	/**
 	 * Creates a new instance of this class.
 	 */
-	public SimulationServer() {
+	public SimulationServer(SimulationConfig aConfig) {
 		systemQueue = new ConcurrentLinkedQueue<BaseParticleSystem>();
 		calcHandlers = new ArrayList<CalculationHandler>();
 
 		totalScore = 0;
 		running = false;
+		
+		config = aConfig;
 	}
 
 	/*
@@ -132,7 +137,7 @@ public class SimulationServer implements SimulationHandler, Runnable {
 								finished = false;
 							}
 						}
-						Thread.sleep(20);
+						Thread.sleep(config.getServerSleepTime());
 					}
 					
 					lastParticleSystem = newParticleSystem;
@@ -179,5 +184,12 @@ public class SimulationServer implements SimulationHandler, Runnable {
 	public void setLastParticleSystem(BaseParticleSystem aLastParticleSystem) {
 		lastParticleSystem = aLastParticleSystem;
 		currentDisplayedPs = lastParticleSystem;
+	}
+
+	/**
+	 * Stops the simulation.
+	 */
+	public void stop() {
+		running  = false;
 	}
 }

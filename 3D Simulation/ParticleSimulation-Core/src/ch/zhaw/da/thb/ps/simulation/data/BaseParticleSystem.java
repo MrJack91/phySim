@@ -4,7 +4,6 @@
 package ch.zhaw.da.thb.ps.simulation.data;
 
 import java.io.Serializable;
-import java.util.Random;
 
 /**
  * @author Daniel Brun
@@ -22,9 +21,6 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 	
 	private float[] coordinates;
 	private float[] colors;
-	
-	private int[] mass;
-	private int[] velocity;
 	
 	/**
 	 * Creates a new instance of this class.
