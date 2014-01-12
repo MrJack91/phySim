@@ -66,11 +66,18 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
             Color3f color3f = new Color3f();
 
+            /*
+            System.out.println("lowerBound\t" + lowerBound);
+            System.out.println("upperBound\t" + upperBound);
+            */
+
             // calc every cordinate
             for (int i = lowerBound; i <= upperBound; i = i + 3) {
-                if (i >= upperBound -6) {
-                    // System.out.println(i);
+                /*
+                if (i >= upperBound -6 || i <= 6) {
+                    System.out.println(i);
                 }
+                */
 
                 calcNextCord(i);
 
@@ -118,8 +125,8 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 curSpeed = 10;
             }
 
-            // my lovely 8888
-            if (i == 3 * 8888) {
+            // debug
+            if (i == 49998) {
                 /*
                 System.out.println("frictionConst:\t\t" + this.frictionConst);
                 System.out.println("gravityConst:\t\t" + this.gravityConst);
@@ -139,6 +146,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("curSpeed:\t\t\t" + curSpeed);
                 System.out.println();
                 */
+
 
 
             }

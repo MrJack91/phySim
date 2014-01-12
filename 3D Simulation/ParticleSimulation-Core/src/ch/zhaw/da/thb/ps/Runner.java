@@ -9,7 +9,6 @@ import ch.zhaw.da.thb.ps.math.init.RandomParticleIniAlgImpl;
 import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
-import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
@@ -28,7 +27,7 @@ public class Runner {
 		
 		
 		//TODO: Should be started from Simulation-Control-GUI
-		BaseParticleSystem basePs = new BaseParticleSystem(100000);
+		// BaseParticleSystem basePs = new BaseParticleSystem(100000);
 
 		// SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
 		// simuAlg.setConfiguration("cube");
@@ -44,8 +43,7 @@ public class Runner {
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
 		SimulationAlgorithm simuAlg = new GravityAlgorithm();
 
-		SimulationConfig config = new SimulationConfig(true, 1000, 50, 5,
-				simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(true, 100000, 50, 5, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();

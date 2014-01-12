@@ -81,6 +81,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 			running = true;
 
 			int loadPerScore = (upperBounds - lowerBounds) / 3 / score;
+
 			int lastIndex = 0;
 
 			for (SimulationAlgorithm simuAlg : simAlgorithms) {
