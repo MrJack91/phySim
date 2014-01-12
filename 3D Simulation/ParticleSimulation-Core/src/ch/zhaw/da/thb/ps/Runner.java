@@ -38,10 +38,11 @@ public class Runner {
 		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
 		// SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
 		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
+        SimulationAlgorithm simuAlg = new GravityAlgorithm();
 
 		ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
-		SimulationAlgorithm simuAlg = new GravityAlgorithm();
+
 
 		SimulationConfig config = new SimulationConfig(true, 100000, 50, 5, simuAlg, initAlg);
 
