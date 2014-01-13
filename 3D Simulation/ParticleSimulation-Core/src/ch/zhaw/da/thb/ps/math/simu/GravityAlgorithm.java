@@ -45,11 +45,14 @@ public class GravityAlgorithm extends BaseAlgorithm {
         simuAlg.resultPs = resultPs;
         simuAlg.lowerBound = lowerBound;
         simuAlg.upperBound = upperBound;
-        simuAlg.stopAt = stopAt;
+        simuAlg.stopAt = stopAt
+        ;
         simuAlg.baseCountInit = baseCountInit;
         simuAlg.baseCountAdditional = baseCountAdditional;
+
         simuAlg.gravityConst = gravityConst;
         simuAlg.frictionConst = frictionConst;
+
         simuAlg.threadCount = threadCount;
         simuAlg.color3f = color3f;
 
@@ -87,10 +90,23 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 //resultPs.getColors()[i] = 0.8f;
             }
 
+
+            // System.out.println("baseCountAdditional:\t" + this.baseCountAdditional);
+
+
             // save
             // FIXME: Number threadCount should be dynamical equal to number of threads
             this.baseCountInit += this.threadCount * this.baseCountAdditional;
             this.baseCountAdditional = 0;
+
+
+
+            /*
+            System.out.println("baseCountInit:\t\t\t" + this.baseCountInit);
+            System.out.println();
+            */
+
+
 
             running = false;
         }
@@ -138,7 +154,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
             }
 
             // debug
-            if (i == 88*3) {
+            if (i == 8888*3) {
                 /*
                 System.out.println("frictionConst:\t\t" + this.frictionConst);
                 System.out.println("gravityConst:\t\t" + this.gravityConst);
@@ -171,36 +187,10 @@ public class GravityAlgorithm extends BaseAlgorithm {
             for (int n = i; n <= i+2; n++) {
                 float corTemp = resultPs.getCoordinates()[n];
 
-
                 // calc next
                 float corNext = (float) (corTemp * factor);
 
-                /*
-                float corNext = corTemp - (sign * (float)curSpeed);
-
-                // fixme: stop at good place -> radius must be <= this.stopAt (1000)
-                // if the sign is switching, stop the particle at stopAt
-                if ((int)Math.signum(corNext) != sign) {
-                    // calc random pos..
-                    corNext = sign * this.rand.nextInt(this.stopAt);
-                }
-                */
-
-                // save for base index count calculation
-                switch (n-i) {
-                    case 0:
-                        corX = corNext;
-                        break;
-                    case 1:
-                        corY = corNext;
-                        break;
-                    case 2:
-                        corZ = corNext;
-                        break;
-                }
-
                 resultPs.getCoordinates()[n] = corNext;
-
 
                 /*
                 int red = (int) (17 + 4 * curSpeed * 10000) ;
@@ -225,16 +215,6 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 */
 
             }
-
-            /*
-            // calc next radius
-            radius = Math.sqrt(Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2));
-            // if last time count it to the base
-            if (radius < this.stopAt) {
-                // baseCountInit++;
-                this.baseCountAdditional++;
-            }
-            */
         }
     }
 
@@ -264,7 +244,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
             // this.gravityConst = 6.673 * Math.pow(10, 6);
 
-            this.gravityConst = 6.673 * Math.pow(10, 6);
+            this.gravityConst = 6.673 * Math.pow(10, 8);
             this.frictionConst = 0.18;
             this.threadCount = 6;
             this.stopAt = 1000;

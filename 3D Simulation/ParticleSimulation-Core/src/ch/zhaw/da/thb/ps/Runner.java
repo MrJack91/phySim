@@ -22,15 +22,12 @@ public class Runner {
 	 */
 	public Runner() {
 		//PSServerInterface server = new PSServerImpl();
-		
-		
-		
-		
+
 		//TODO: Should be started from Simulation-Control-GUI
-		// SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
-		// simuAlg.setConfiguration("cube");
 
         // select an anlgorithm
+        // SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
+        // simuAlg.setConfiguration("cube");
 		// SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
 		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
 		// SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
@@ -40,7 +37,7 @@ public class Runner {
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
 
 
-		SimulationConfig config = new SimulationConfig(true, 10000, 50, 5, simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(true, 100000, 50, 5, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();
