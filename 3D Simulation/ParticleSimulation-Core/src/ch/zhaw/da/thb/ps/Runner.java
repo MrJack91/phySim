@@ -27,24 +27,20 @@ public class Runner {
 		
 		
 		//TODO: Should be started from Simulation-Control-GUI
-		// BaseParticleSystem basePs = new BaseParticleSystem(100000);
-
 		// SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
 		// simuAlg.setConfiguration("cube");
 
-		// SimulationAlgorithm simuAlg = new GravityAlgorithm();
-
+        // select an anlgorithm
 		// SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
 		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
 		// SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
-		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
         SimulationAlgorithm simuAlg = new GravityAlgorithm();
 
 		ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
 
 
-		SimulationConfig config = new SimulationConfig(true, 100000, 50, 5, simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(true, 10000, 50, 5, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();

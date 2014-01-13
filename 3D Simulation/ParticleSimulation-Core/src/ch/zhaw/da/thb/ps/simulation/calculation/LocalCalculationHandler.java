@@ -23,7 +23,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 
 	private boolean running;
 
-	private int score;
+	public int score;
 
 	private int lowerBounds;
 	private int upperBounds;
@@ -46,7 +46,7 @@ public class LocalCalculationHandler implements CalculationHandler {
 	public LocalCalculationHandler(SimulationAlgorithm aSimulationAlgorithm, SimulationConfig aConfig) {
 
 		if (aConfig.isUseMultiCore()) {
-            // use a 3er numer s
+            // use a 3er number
             score = Runtime.getRuntime().availableProcessors();
             score += 3 - (score % 3);
 		} else {
