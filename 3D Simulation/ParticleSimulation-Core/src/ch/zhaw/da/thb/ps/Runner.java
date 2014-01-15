@@ -37,7 +37,7 @@ public class Runner {
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(1000);
 
 
-		SimulationConfig config = new SimulationConfig(true, 100000, 50, 5, simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(false, 21, 50, 5, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();

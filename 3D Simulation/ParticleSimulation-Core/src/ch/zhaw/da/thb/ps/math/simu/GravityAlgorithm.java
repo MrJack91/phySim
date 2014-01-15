@@ -130,7 +130,17 @@ public class GravityAlgorithm extends BaseAlgorithm {
         radius = Math.sqrt(radiusQuad);
 
         // calc radius for growth bowl in the middle
-        // this.stopAt = (int) Math.pow((3*(this.threadCount * (this.baseCountInit + this.baseCountAdditional)))/(4 * Math.PI), 1.0/3)*10;
+        this.stopAt = (int) Math.pow((3*(this.threadCount * (3*(this.baseCountInit))))/(4 * Math.PI), 1.0/3);
+        // this.stopAt = (int) Math.pow((3*(this.threadCount * (this.baseCountInit)))/(4 * Math.PI), 1.0/3)*50;
+
+
+        // debug
+        if (i == 60) {
+            System.out.println("radius:\t\t\t\t" + (radius));
+            System.out.println("stopAt:\t\t\t\t" + (this.stopAt));
+            System.out.println();
+        }
+
 
         // is point not in base, save next position
         if (radius >= this.stopAt) {
@@ -142,44 +152,24 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 curSpeed = 0;
             }
             if (curSpeed == 0) {
-                curSpeed = 10;
+                curSpeed = 1;
             }
 
             double nextRadius = radius - curSpeed;
+
+
+            // debug
+            if (i == 60) {
+                System.out.println("nextRadius:\t\t\t\t" + (nextRadius));
+            }
+
+
 
             // check the limit of move (at center)
             if (nextRadius < this.stopAt) {
                 nextRadius = this.stopAt;
                 this.baseCountAdditional++;
             }
-
-            // debug
-            if (i == 8888*3) {
-                /*
-                System.out.println("frictionConst:\t\t" + this.frictionConst);
-                System.out.println("gravityConst:\t\t" + this.gravityConst);
-                System.out.println("baseCountInit:\t\t" + this.baseCountInit);
-                */
-                // System.out.println("i:\t\t\t\t\t" + i);
-
-                /*
-                System.out.println("corX:\t\t\t\t" + corX);
-                System.out.println("corY:\t\t\t\t\t" + corY);
-                System.out.println("corZ:\t\t\t\t\t" + corZ);
-                System.out.println("corX^2:\t\t\t\t\t" + Math.pow(corX, 2));
-                System.out.println("corY^2:\t\t\t\t\t" + Math.pow(corY, 2));
-                System.out.println("corZ^2:\t\t\t\t\t" + Math.pow(corZ, 2));
-                System.out.println("radius^2:\t\t\t\t" + (Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2)));
-                System.out.println("stopAt:\t\t\t\t\t" + (this.stopAt));
-                System.out.println("radius:\t\t\t\t\t" + (radius));
-                System.out.println("curSpeed:\t\t\t\t" + curSpeed);
-                System.out.println("baseCountInit:\t\t\t" + this.baseCountInit);
-                System.out.println("baseCountAdditional:\t" + this.baseCountAdditional);
-                System.out.println();
-                */
-
-            }
-
 
             double factor = this.getFactorFromRadius(nextRadius, resultPs.getCoordinates()[i], resultPs.getCoordinates()[i+1], resultPs.getCoordinates()[i+2]);
 
@@ -189,6 +179,10 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
                 // calc next
                 float corNext = (float) (corTemp * factor);
+
+                if (i == 60) {
+                    System.out.println(corTemp + " => " + corNext);
+                }
 
                 resultPs.getCoordinates()[n] = corNext;
 
@@ -214,6 +208,33 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 resultPs.getColors()[i+2] = color3f.z;
                 */
 
+            }
+
+
+            // debug
+            if (i == 60) {
+                /*
+                System.out.println("frictionConst:\t\t" + this.frictionConst);
+                System.out.println("gravityConst:\t\t" + this.gravityConst);
+                System.out.println("baseCountInit:\t\t" + this.baseCountInit);
+                */
+                System.out.println("i:\t\t\t\t\t\t" + i);
+
+                System.out.println("corX:\t\t\t\t\t" + corX);
+                System.out.println("corY:\t\t\t\t\t" + corY);
+                System.out.println("corZ:\t\t\t\t\t" + corZ);
+                System.out.println("corX^2:\t\t\t\t\t" + Math.pow(corX, 2));
+                System.out.println("corY^2:\t\t\t\t\t" + Math.pow(corY, 2));
+                System.out.println("corZ^2:\t\t\t\t\t" + Math.pow(corZ, 2));
+                System.out.println("radius^2:\t\t\t\t" + (Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2)));
+                System.out.println("radius:\t\t\t\t\t" + (radius));
+                System.out.println("nextRadius:\t\t\t\t" + (nextRadius));
+                System.out.println("curSpeed:\t\t\t\t" + curSpeed);
+                System.out.println("factor:\t\t\t\t\t" + factor);
+                System.out.println("stopAt:\t\t\t\t\t" + (this.stopAt));
+                System.out.println("baseCountInit:\t\t\t" + this.baseCountInit);
+                System.out.println("baseCountAdditional:\t" + this.baseCountAdditional);
+                System.out.println();
             }
         }
     }
@@ -244,10 +265,10 @@ public class GravityAlgorithm extends BaseAlgorithm {
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
             // this.gravityConst = 6.673 * Math.pow(10, 6);
 
-            this.gravityConst = 6.673 * Math.pow(10, 8);
+            this.gravityConst = 6.673 * Math.pow(10, 3);
             this.frictionConst = 0.18;
             this.threadCount = 6;
-            this.stopAt = 1000;
+            // this.stopAt = 10;
             // this.stopAt = this.threadCount;
         }
     }

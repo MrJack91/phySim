@@ -3,13 +3,9 @@
  */
 package ch.zhaw.da.thb.ps.graphic;
 
-import javax.media.j3d.Appearance;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.PointArray;
-import javax.media.j3d.PointAttributes;
-import javax.media.j3d.Shape3D;
-
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import javax.media.j3d.*;
 
 /**
  * @author Daniel Brun
@@ -33,7 +29,7 @@ public class ParticleSystemGraphic extends Shape3D {
 		particleSystem = aParticleSystem;
 		
 		//Init Point-Array
-		pointArray = new PointArray(particleSystem.getParticleCount(), PointArray.COORDINATES
+		pointArray = new PointArray(particleSystem.getParticleCount()-1, PointArray.COORDINATES
 				| PointArray.COLOR_3 | PointArray.BY_REFERENCE);
 
 		//Set "Permission" for change
