@@ -50,8 +50,7 @@ public class SimulationServer implements SimulationHandler, Runnable {
 	 * (non-Javadoc)
 	 * 
 	 * @see ch.zhaw.da.thb.ps.handler.SimulationHandler#
-	 * updateParticleSystemWithNextAvailable
-	 * (ch.zhaw.da.zhb.ps.BaseParticleSystem)
+	 * updateParticleSystemWithNextAvailable * (ch.zhaw.da.zhb.ps.BaseParticleSystem)
 	 */
 	@Override
 	public BaseParticleSystem updateParticleSystemWithNextAvailable() {
@@ -129,6 +128,16 @@ public class SimulationServer implements SimulationHandler, Runnable {
 								newParticleSystem.setColors(mergeArray(
 										newParticleSystem.getColors(),
 										tmpSystem.getColors(),handler.getLowerBound(),
+										handler.getUpperBound()));
+								
+								newParticleSystem.setMass(mergeArray(
+										newParticleSystem.getMass(),
+										tmpSystem.getMass(),handler.getLowerBound(),
+										handler.getUpperBound()));
+								
+								newParticleSystem.setVelocity(mergeArray(
+										newParticleSystem.getVelocity(),
+										tmpSystem.getVelocity(),handler.getLowerBound(),
 										handler.getUpperBound()));
 								
 								results.remove(future);

@@ -47,6 +47,8 @@ public class ParticleSystemUpdater implements GeometryUpdater {
 		for (int i = 0; i < particleSystem.getParticleCount() * 3; i++) {
 			particleSystem.getCoordinates()[i] = updatedPs.getCoordinates()[i];
 			particleSystem.getColors()[i] = updatedPs.getColors()[i];
+			particleSystem.getMass()[i] = updatedPs.getMass()[i];
+			particleSystem.getVelocity()[i] = updatedPs.getVelocity()[i];
 		}
 	}
 

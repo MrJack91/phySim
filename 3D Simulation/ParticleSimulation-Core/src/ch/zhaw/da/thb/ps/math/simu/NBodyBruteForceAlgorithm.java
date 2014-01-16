@@ -94,15 +94,22 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 
 			// Gravitational Constant
 			float g = (float) (667384 * Math.pow(10, -11));
-			float softeningFactor = 20;//(float) Math.pow(100, -10);
-			float xMass = 1000;
 			
+			//Softening factor
+			float softeningFactor = (float) Math.pow(100, -10);
+			
+			//Speed-Up factor
+			int speedUp = lastPs.getParticleCount() / 100;
+
 			// Loop over each particle in the given boundaries
 			for (int i = lowerBound; i < upperBound; i += 3) {
-				float summ = 0;
 				float lastX = lastPs.getCoordinates()[i];
 				float lastY = lastPs.getCoordinates()[i + 1];
 				float lastZ = lastPs.getCoordinates()[i + 2];
+				
+				float summX = 0;
+				float summY = 0;
+				float summZ = 0;
 
 				// Loop over the last particle system and calculate each
 				// dependency
@@ -113,29 +120,48 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 									2)
 							+ Math.pow(lastZ - lastPs.getCoordinates()[x + 2],
 									2));
-
-					// Calculate
-					summ += ((xMass * distance) / (float) Math.pow(
+					float partial = ((lastPs.getMass()[x] * distance) / (float) Math.pow(
 							Math.pow(distance, 2)
 							+ Math.pow(softeningFactor, 2), (3 / 2)));
+					
+					// Calculate Summs
+					if((lastX - lastPs.getCoordinates()[x]) >= 0){
+						summX += partial*-1;
+					}else{
+						summX += partial;
+					}
+					
+					if((lastY - lastPs.getCoordinates()[x+1]) >= 0){
+						summY += partial*-1;
+					}else{
+						summY += partial;
+					}
+					
+					if((lastZ - lastPs.getCoordinates()[x+2]) >= 0){
+						summZ += partial*-1;
+					}else{
+						summZ += partial;
+					}
 				}
 
-				float acceleration = g * summ;
-
-				// Calculate position
-				for (int y = i; y <= (i + 3); y++) {
-					int sign = (int) Math.signum(lastPs.getCoordinates()[y]);
-					float nextPos = lastPs.getCoordinates()[y]
-							- (sign * (float) (acceleration * 40));
-					resultPs.getCoordinates()[y] = nextPos;
-				}
-
-				int red = (int) (17 + 4 * acceleration * 1000);
+				//v = v0 + a * t 
+				resultPs.getVelocity()[i] = lastPs.getVelocity()[i] + g * summX * 10;
+				resultPs.getVelocity()[i +1] = lastPs.getVelocity()[i+1] + g * summY * 10;
+				resultPs.getVelocity()[i+2] = lastPs.getVelocity()[i+2] + g * summZ * 10;
+				
+				//s = v * t + s0
+				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i]  + resultPs.getVelocity()[i] * 10;
+				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * 10;
+				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * 10;
+				
+				float unsignedAcc = Math.abs(resultPs.getVelocity()[i]) * 100;
+				
+				int red = (int) (17 + 4 * unsignedAcc );
 				int green = 209;
 
 				if (red >= 209) {
 					red = 209;
-					green = (int) (209 - 3 * acceleration * 100);
+					green = (int) (209 - 3 * unsignedAcc);
 				}
 
 				if (green <= 17) {
