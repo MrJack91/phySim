@@ -96,7 +96,8 @@ public class NBodyBruteForceAlgorithm implements SimulationAlgorithm {
 			float g = (float) (667384 * Math.pow(10, -11));
 			
 			//Softening factor
-			float softeningFactor = (float) Math.pow(100, -10);
+			//float softeningFactor = (float) Math.pow(100, -10);
+			float softeningFactor =Math.ulp(1.0f);
 			
 			//Speed-Up factor
 			int speedUp = lastPs.getParticleCount() / 100;
