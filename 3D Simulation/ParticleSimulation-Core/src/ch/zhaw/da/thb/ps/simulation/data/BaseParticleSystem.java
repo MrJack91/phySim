@@ -17,12 +17,12 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 	 */
 	private static final long serialVersionUID = -8867574492639089834L;
 
-	private int particleCount;
+	protected int particleCount;
 	
-	private float[] coordinates;
-	private float[] colors;
-	private float[] mass;
-	private float[] velocity;
+	protected float[] coordinates;
+	protected float[] colors;
+	protected float[] mass;
+	protected float[] velocity;
 	
 	/**
 	 * Creates a new instance of this class.

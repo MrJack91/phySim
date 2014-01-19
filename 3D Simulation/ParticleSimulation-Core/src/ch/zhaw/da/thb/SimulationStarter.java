@@ -4,9 +4,11 @@
 package ch.zhaw.da.thb;
 
 import ch.zhaw.da.thb.ps.graphic.SimulationGUI;
+import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
 import ch.zhaw.da.thb.ps.simulation.SimulationServer;
 import ch.zhaw.da.thb.ps.simulation.calculation.LocalCalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BarnesHutParticleSystem;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
@@ -18,16 +20,19 @@ public class SimulationStarter {
 
 	private SimulationServer simuServer;
 	private BaseParticleSystem basePs;
-	private SimulationConfig config;	
-	
+	private SimulationConfig config;
+
 	/**
 	 * Starts the simulation with the given config.
 	 */
 	public SimulationStarter(SimulationConfig aConfig) {
 		config = aConfig;
-		
-		basePs = new BaseParticleSystem(
-				config.getParticleCount());
+
+		if (config.getSimulationAlgorithm() instanceof BarnesHutAlgorithm) {
+			basePs = new BarnesHutParticleSystem(config.getParticleCount());
+		} else {
+			basePs = new BaseParticleSystem(config.getParticleCount());
+		}
 
 		config.getInitializeAlgorithm().initializeSystem(basePs);
 
@@ -54,7 +59,6 @@ public class SimulationStarter {
 		Thread simuThread = new Thread(simuServer);
 		simuThread.start();
 
-	
 	}
 
 	/**

@@ -13,8 +13,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import ch.zhaw.da.thb.ps.handler.SimulationHandler;
+import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.calculation.CalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BarnesHutParticleSystem;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
@@ -103,6 +105,11 @@ public class SimulationServer implements SimulationHandler, Runnable {
 			try {
 				while (running) {
 
+					//Some special treatments
+					if(config.getSimulationAlgorithm() instanceof BarnesHutAlgorithm){
+						((BarnesHutParticleSystem)lastParticleSystem).createTree();
+					}
+					
 					// Starting new calculation step
 					for (CalculationHandler handler : calcHandlers) {
 						// Set last data
