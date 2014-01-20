@@ -18,4 +18,12 @@ public interface SimulationHandler {
 	 * @return The updated particle system.
 	 */
 	public BaseParticleSystem updateParticleSystemWithNextAvailable();
+	
+	/**
+	 * Fired when the mouse is clicked in the canvas.
+	 * 
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 */
+	public void mouseClicked(int x, int y);
 }

@@ -48,6 +48,15 @@ public class RandomParticleIniAlgImpl implements ParticleInitializeAlgorithm {
 			aSystem.getColors()[i] = color3f.x;
 			aSystem.getColors()[i + 1] = color3f.y;
 			aSystem.getColors()[i + 2] = color3f.z;
+			
+			int m = rand.nextInt(100);
+			aSystem.getMass()[i] = m;
+			aSystem.getMass()[i+1] = m;
+			aSystem.getMass()[i+2] = m;
+			
+			aSystem.getVelocity()[i] = 0;
+			aSystem.getVelocity()[i+1] = 0;
+			aSystem.getVelocity()[i+2] = 0;
 		}
 
 		return aSystem;

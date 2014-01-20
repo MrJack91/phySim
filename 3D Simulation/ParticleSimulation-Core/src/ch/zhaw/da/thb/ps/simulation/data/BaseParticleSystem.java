@@ -17,10 +17,12 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 	 */
 	private static final long serialVersionUID = -8867574492639089834L;
 
-	private int particleCount;
+	protected int particleCount;
 	
-	private float[] coordinates;
-	private float[] colors;
+	protected float[] coordinates;
+	protected float[] colors;
+	protected float[] mass;
+	protected float[] velocity;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -33,6 +35,8 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		
 		coordinates = new float[aParticleCount * 3];
 		colors = new float[aParticleCount * 3];
+		mass = new float[aParticleCount * 3];
+		velocity = new float[aParticleCount * 3];
 
 	}
 
@@ -71,6 +75,35 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		return colors;
 	}
 	
+	
+	/**
+	 * @return the mass
+	 */
+	public float[] getMass() {
+		return mass;
+	}
+
+	/**
+	 * @param mass the mass to set
+	 */
+	public void setMass(float[] mass) {
+		this.mass = mass;
+	}
+
+	/**
+	 * @return the velocity
+	 */
+	public float[] getVelocity() {
+		return velocity;
+	}
+
+	/**
+	 * @param velocity the velocity to set
+	 */
+	public void setVelocity(float[] velocity) {
+		this.velocity = velocity;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#clone()
 	 */
@@ -80,6 +113,8 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		clonePs.particleCount = particleCount;
 		clonePs.coordinates = coordinates.clone();
 		clonePs.colors = colors.clone();
+		clonePs.mass = mass.clone();
+		clonePs.velocity = velocity.clone();
 		
 		return clonePs;
 	}

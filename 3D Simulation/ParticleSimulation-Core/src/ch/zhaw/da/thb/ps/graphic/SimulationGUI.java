@@ -5,6 +5,8 @@ package ch.zhaw.da.thb.ps.graphic;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
@@ -29,7 +31,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
  * @author Daniel Brun
  * 
  */
-public class SimulationGUI extends JFrame {
+public class SimulationGUI extends JFrame implements MouseListener{
 
 	/**
 	 * Generated Serial Version UID.
@@ -44,6 +46,8 @@ public class SimulationGUI extends JFrame {
 	private SimulationHandler simuHandler;
 
 	private SimulationConfig config;
+	
+	private Canvas3D canvas;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -81,9 +85,10 @@ public class SimulationGUI extends JFrame {
 		setLayout(new BorderLayout());
 
 		// Create 3D-Canvas
-		Canvas3D canvas = new Canvas3D(
+		canvas = new Canvas3D(
 				SimpleUniverse.getPreferredConfiguration());
-
+		canvas.addMouseListener(this);
+		
 		// Create scene
 		BranchGroup sceneGraph = createSceneGraph();
 
@@ -163,5 +168,41 @@ public class SimulationGUI extends JFrame {
 		rootObj.addChild(psControler);
 
 		return rootObj;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent anEvent) {
+		Dimension dim = this.getSize();
+		
+		int xZeroPos = dim.width / 2;
+		int yZeroPos = dim.height / 2;
+		
+		int xMousePos = (int) canvas.getMousePosition().getX();
+		int yMousePos = (int) canvas.getMousePosition().getY();
+
+		int x3dPos = xMousePos - xZeroPos;
+		int y3dPos = -1*yMousePos + yZeroPos;
+		
+		simuHandler.mouseClicked(x3dPos,y3dPos);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent anEvent) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent anEvent) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent anEvent) {
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent anEvent) {
+		
 	}
 }

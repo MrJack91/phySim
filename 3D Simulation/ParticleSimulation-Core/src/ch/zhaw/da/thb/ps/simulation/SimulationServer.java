@@ -3,14 +3,21 @@
  */
 package ch.zhaw.da.thb.ps.simulation;
 
-import ch.zhaw.da.thb.ps.handler.SimulationHandler;
-import ch.zhaw.da.thb.ps.simulation.calculation.CalculationHandler;
-import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import ch.zhaw.da.thb.ps.handler.SimulationHandler;
+import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
+import ch.zhaw.da.thb.ps.simulation.calculation.CalculationHandler;
+import ch.zhaw.da.thb.ps.simulation.data.BarnesHutParticleSystem;
+import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
 
 /**
  * @author Daniel Brun
@@ -50,8 +57,7 @@ public class SimulationServer implements SimulationHandler, Runnable {
 	 * (non-Javadoc)
 	 * 
 	 * @see ch.zhaw.da.thb.ps.handler.SimulationHandler#
-	 * updateParticleSystemWithNextAvailable
-	 * (ch.zhaw.da.zhb.ps.BaseParticleSystem)
+	 * updateParticleSystemWithNextAvailable * (ch.zhaw.da.zhb.ps.BaseParticleSystem)
 	 */
 	@Override
 	public BaseParticleSystem updateParticleSystemWithNextAvailable() {
@@ -99,6 +105,11 @@ public class SimulationServer implements SimulationHandler, Runnable {
 			try {
 				while (running) {
 
+					//Some special treatments
+					if(config.getSimulationAlgorithm() instanceof BarnesHutAlgorithm){
+						((BarnesHutParticleSystem)lastParticleSystem).createTree();
+					}
+					
 					// Starting new calculation step
 					for (CalculationHandler handler : calcHandlers) {
 						// Set last data
@@ -129,6 +140,16 @@ public class SimulationServer implements SimulationHandler, Runnable {
 								newParticleSystem.setColors(mergeArray(
 										newParticleSystem.getColors(),
 										tmpSystem.getColors(),handler.getLowerBound(),
+										handler.getUpperBound()));
+								
+								newParticleSystem.setMass(mergeArray(
+										newParticleSystem.getMass(),
+										tmpSystem.getMass(),handler.getLowerBound(),
+										handler.getUpperBound()));
+								
+								newParticleSystem.setVelocity(mergeArray(
+										newParticleSystem.getVelocity(),
+										tmpSystem.getVelocity(),handler.getLowerBound(),
 										handler.getUpperBound()));
 								
 								results.remove(future);
@@ -191,5 +212,13 @@ public class SimulationServer implements SimulationHandler, Runnable {
 	 */
 	public void stop() {
 		running  = false;
+	}
+
+	@Override
+	public void mouseClicked(int x, int y) {
+		if(config.getSimulationAlgorithm() instanceof GravityAlgorithm){
+			//((GravityAlgorithm)config.getSimulationAlgorithm()).
+		}
+		
 	}
 }
