@@ -3,12 +3,11 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
-import java.awt.Color;
-
-import javax.vecmath.Color3f;
-
 import ch.zhaw.da.thb.ps.simulation.data.BarnesHutParticleSystem;
 import ch.zhaw.da.thb.ps.simulation.data.BaseParticleSystem;
+
+import javax.vecmath.Color3f;
+import java.awt.*;
 
 /**
  * @author Daniel Brun
@@ -102,8 +101,8 @@ public class BarnesHutAlgorithm implements SimulationAlgorithm {
 				lastPs.getRootNode().calculate(i, lastX, lastY, lastZ, resultPs);
 				
 				//s = v * t + s0
-				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i]  + resultPs.getVelocity()[i] * 200;
-				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] *200;
+				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i] + resultPs.getVelocity()[i] * 200;
+				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * 200;
 				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * 200;
 				
 				float unsignedAcc = Math.abs(resultPs.getVelocity()[i]) * 100;

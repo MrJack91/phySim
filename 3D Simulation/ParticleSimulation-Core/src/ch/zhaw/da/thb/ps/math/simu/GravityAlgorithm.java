@@ -45,8 +45,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
         simuAlg.resultPs = resultPs;
         simuAlg.lowerBound = lowerBound;
         simuAlg.upperBound = upperBound;
-        simuAlg.stopAt = stopAt
-        ;
+        simuAlg.stopAt = stopAt;
         simuAlg.baseCountInit = baseCountInit;
         simuAlg.baseCountAdditional = baseCountAdditional;
 
