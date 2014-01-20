@@ -5,7 +5,8 @@ package ch.zhaw.da.thb.ps;
 
 import ch.zhaw.da.thb.SimulationStarter;
 import ch.zhaw.da.thb.ps.math.init.Grid3DInitAlgImpl;
-import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
 
 /**
@@ -23,17 +24,19 @@ public class Runner {
 
 		//TODO: Should be started from Simulation-Control-GUI
 
-        // select an anlgorithm
+        // select an algorithm
         // SimulationAlgorithm simuAlg = new MeetpointAlgorithm();
         // simuAlg.setConfiguration("cube");
-		 //SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
-		// SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
-		// SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
-       // SimulationAlgorithm simuAlg = new GravityAlgorithm();
-		 BarnesHutAlgorithm simuAlg = new BarnesHutAlgorithm();
-		//ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
-		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,500);
-		 Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000,50,400);
+        // SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
+        // SimulationAlgorithm simuAlg = new RandomExampleAlgorithm();
+        // SimulationAlgorithm simuAlg = new MovingExampleAlgorithm();
+        SimulationAlgorithm simuAlg = new GravityAlgorithm();
+        // BarnesHutAlgorithm simuAlg = new BarnesHutAlgorithm();
+
+        // select an particle system base
+        // ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000);
+		Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000,50,400);
 		// Grid2DInitAlgImpl initAlg = new Grid2DInitAlgImpl(500,5,100);
 
 

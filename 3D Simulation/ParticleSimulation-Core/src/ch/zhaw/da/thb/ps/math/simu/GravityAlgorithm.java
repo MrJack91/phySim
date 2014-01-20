@@ -129,19 +129,8 @@ public class GravityAlgorithm extends BaseAlgorithm {
         radius = Math.sqrt(radiusQuad);
 
         // calc radius for growth bowl in the middle
-        this.stopAt = (int) Math.pow((3*(this.threadCount * (3*(this.baseCountInit))))/(4 * Math.PI), 1.0/3);
+        // this.stopAt = (int) Math.pow((3*(this.threadCount * (3*(this.baseCountInit))))/(4 * Math.PI), 1.0/3);
         // this.stopAt = (int) Math.pow((3*(this.threadCount * (this.baseCountInit)))/(4 * Math.PI), 1.0/3)*50;
-
-
-        // debug
-        /*
-        if (i == 60) {
-            System.out.println("radius:\t\t\t\t" + (radius));
-            System.out.println("stopAt:\t\t\t\t" + (this.stopAt));
-            System.out.println();
-        }
-        */
-
 
         // is point not in base, save next position
         if (radius >= this.stopAt) {
@@ -258,10 +247,10 @@ public class GravityAlgorithm extends BaseAlgorithm {
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
             // this.gravityConst = 6.673 * Math.pow(10, 6);
 
-            this.gravityConst = 6.673 * Math.pow(10, 6);
+            this.gravityConst = 6.673 * Math.pow(10, 5);
             this.frictionConst = 0.18;
             this.threadCount = 6;
-            // this.stopAt = 10;
+            this.stopAt = 100;
             // this.stopAt = this.threadCount;
         }
     }
