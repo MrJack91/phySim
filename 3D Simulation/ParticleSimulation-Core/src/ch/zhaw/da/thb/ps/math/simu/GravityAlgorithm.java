@@ -17,7 +17,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
     /**
      * the mass of the base before calc
      */
-    private int baseCountInit = 1;
+    private int baseCountInit = 10;
 
     /**
      * the mass of the base while the count -> after
@@ -135,11 +135,13 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
 
         // debug
+        /*
         if (i == 60) {
             System.out.println("radius:\t\t\t\t" + (radius));
             System.out.println("stopAt:\t\t\t\t" + (this.stopAt));
             System.out.println();
         }
+        */
 
 
         // is point not in base, save next position
@@ -158,13 +160,6 @@ public class GravityAlgorithm extends BaseAlgorithm {
             double nextRadius = radius - curSpeed;
 
 
-            // debug
-            if (i == 60) {
-                System.out.println("nextRadius:\t\t\t\t" + (nextRadius));
-            }
-
-
-
             // check the limit of move (at center)
             if (nextRadius < this.stopAt) {
                 nextRadius = this.stopAt;
@@ -179,10 +174,6 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
                 // calc next
                 float corNext = (float) (corTemp * factor);
-
-                if (i == 60) {
-                    System.out.println(corTemp + " => " + corNext);
-                }
 
                 resultPs.getCoordinates()[n] = corNext;
 
@@ -218,6 +209,8 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("gravityConst:\t\t" + this.gravityConst);
                 System.out.println("baseCountInit:\t\t" + this.baseCountInit);
                 */
+
+                /*
                 System.out.println("i:\t\t\t\t\t\t" + i);
 
                 System.out.println("corX:\t\t\t\t\t" + corX);
@@ -235,6 +228,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("baseCountInit:\t\t\t" + this.baseCountInit);
                 System.out.println("baseCountAdditional:\t" + this.baseCountAdditional);
                 System.out.println();
+                */
             }
         }
     }
@@ -265,7 +259,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
             // this.gravityConst = 6.673 * Math.pow(10, 6);
 
-            this.gravityConst = 6.673 * Math.pow(10, 3);
+            this.gravityConst = 6.673 * Math.pow(10, 6);
             this.frictionConst = 0.18;
             this.threadCount = 6;
             // this.stopAt = 10;
