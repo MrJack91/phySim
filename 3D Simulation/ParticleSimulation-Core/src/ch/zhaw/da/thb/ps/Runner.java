@@ -5,7 +5,8 @@ package ch.zhaw.da.thb.ps;
 
 import ch.zhaw.da.thb.SimulationStarter;
 import ch.zhaw.da.thb.ps.math.init.Grid3DInitAlgImpl;
-import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
 
 /**
@@ -27,19 +28,26 @@ public class Runner {
         // select an algorithm
          //SimulationAlgorithm simuAlg = new NBodyBruteForceAlgorithm();
 
-        //SimulationAlgorithm simuAlg = new GravityAlgorithm();
-         BarnesHutAlgorithm simuAlg = new BarnesHutAlgorithm();
+
+        SimulationAlgorithm simuAlg = new GravityAlgorithm();
+        // BarnesHutAlgorithm simuAlg = new BarnesHutAlgorithm();
 
 
         int sliceValue = 10;
         int particleCount = 5000;
         /* START - Parts for GravityAlgorithm grid definitions */
+        /*
         sliceValue = 100;
         particleCount = 2000;
+        */
 
+        /*
+        sliceValue = 50;
+        particleCount = 5000;
+        */
 
-
-
+        sliceValue = 100;
+        particleCount = 10000;
 
 
         Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);

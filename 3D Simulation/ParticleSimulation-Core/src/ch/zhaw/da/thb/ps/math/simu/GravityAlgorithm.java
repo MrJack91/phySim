@@ -247,7 +247,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
             // this.gravityConst = 6.673 * Math.pow(10, -18); // Erd Gravitationskraft
             // this.gravityConst = 6.673 * Math.pow(10, 6);
 
-            this.gravityConst = 6.673 * Math.pow(10, 4);
+            this.gravityConst = 6.673 * Math.pow(10, 5);
             this.frictionConst = 0.18;
             this.threadCount = 6;
             this.stopAt = 100;
