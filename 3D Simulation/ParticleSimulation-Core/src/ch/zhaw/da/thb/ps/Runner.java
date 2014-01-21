@@ -4,7 +4,8 @@
 package ch.zhaw.da.thb.ps;
 
 import ch.zhaw.da.thb.SimulationStarter;
-import ch.zhaw.da.thb.ps.math.init.Grid3DInitAlgImpl;
+import ch.zhaw.da.thb.ps.math.init.ParticleInitializeAlgorithm;
+import ch.zhaw.da.thb.ps.math.init.RandomParticleIniAlgImpl;
 import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
@@ -34,8 +35,10 @@ public class Runner {
 
 
         int sliceValue = 10;
-        int particleCount = 5000;
+        int particleCount = 10000;
         /* START - Parts for GravityAlgorithm grid definitions */
+        ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
+
         /*
         sliceValue = 100;
         particleCount = 2000;
@@ -50,7 +53,7 @@ public class Runner {
         particleCount = 10000;
 
 
-        Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
+        // Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
         /* END - Parts for GravityAlgorithm grid definitions */
 
 
