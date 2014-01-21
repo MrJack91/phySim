@@ -23,6 +23,7 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 	protected float[] colors;
 	protected float[] mass;
 	protected float[] velocity;
+	protected float[] acceleration;
 	
 	/**
 	 * Creates a new instance of this class.
@@ -37,6 +38,7 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		colors = new float[aParticleCount * 3];
 		mass = new float[aParticleCount * 3];
 		velocity = new float[aParticleCount * 3];
+		acceleration = new float[aParticleCount * 3];
 
 	}
 
@@ -104,6 +106,20 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		this.velocity = velocity;
 	}
 
+	/**
+	 * @return the acceleration
+	 */
+	public float[] getAcceleration() {
+		return acceleration;
+	}
+
+	/**
+	 * @param acceleration the acceleration to set
+	 */
+	public void setAcceleration(float[] acceleration) {
+		this.acceleration = acceleration;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#clone()
 	 */
@@ -115,6 +131,7 @@ public class BaseParticleSystem implements Serializable, Cloneable {
 		clonePs.colors = colors.clone();
 		clonePs.mass = mass.clone();
 		clonePs.velocity = velocity.clone();
+		clonePs.acceleration = acceleration.clone();
 		
 		return clonePs;
 	}

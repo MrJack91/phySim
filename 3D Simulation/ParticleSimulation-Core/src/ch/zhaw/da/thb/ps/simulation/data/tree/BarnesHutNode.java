@@ -17,7 +17,6 @@ public class BarnesHutNode {
 
 	private static final float INDICATION_FACTOR = 0.4f;
 	private static final float SOFTENING_FACTOR = Math.ulp(1.0f);
-	private static final float GRAVITY = (float) (667384 * Math.pow(10, -11));
 
 	private BaseParticleSystem basePS;
 	private List<BarnesHutNode> childNodes;
@@ -210,27 +209,27 @@ public class BarnesHutNode {
 
 			// Calculate Summs
 			if ((anXPos - middleXPos) >= 0) {
-				aResultPs.getVelocity()[anIndex] = basePS.getVelocity()[anIndex]
-						+ GRAVITY * partial * -1 * 10;
+				aResultPs.getAcceleration()[anIndex] = aResultPs.getAcceleration()[anIndex]
+						+ partial * -1;
 			} else {
-				aResultPs.getVelocity()[anIndex] = basePS.getVelocity()[anIndex]
-						+ GRAVITY * partial * 10;
+				aResultPs.getAcceleration()[anIndex] = aResultPs.getAcceleration()[anIndex]
+						+ partial;
 			}
 
 			if ((anYPos - middleYPos) >= 0) {
-				aResultPs.getVelocity()[anIndex + 1] = basePS.getVelocity()[anIndex + 1]
-						+ GRAVITY * partial * -1 * 10;
+				aResultPs.getAcceleration()[anIndex + 1] = aResultPs.getAcceleration()[anIndex + 1]
+						+ partial * -1;
 			} else {
-				aResultPs.getVelocity()[anIndex + 1] = basePS.getVelocity()[anIndex + 1]
-						+ GRAVITY * partial * 10;
+				aResultPs.getAcceleration()[anIndex + 1] = aResultPs.getAcceleration()[anIndex + 1]
+						+ partial;
 			}
 
 			if ((aZPos - middleZPos) >= 0) {
-				aResultPs.getVelocity()[anIndex + 2] = basePS.getVelocity()[anIndex + 2]
-						+ GRAVITY * partial * -1 * 10;
+				aResultPs.getAcceleration()[anIndex + 2] = aResultPs.getAcceleration()[anIndex + 2]
+						+ partial * -1;
 			} else {
-				aResultPs.getVelocity()[anIndex + 2] = basePS.getVelocity()[anIndex + 2]
-						+ GRAVITY * partial * 10;
+				aResultPs.getAcceleration()[anIndex + 2] = aResultPs.getAcceleration()[anIndex + 2]
+						+ partial;
 			}
 		} else {
 			for (BarnesHutNode node : childNodes) {
