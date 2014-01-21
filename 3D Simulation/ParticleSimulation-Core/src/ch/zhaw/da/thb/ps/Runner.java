@@ -33,14 +33,30 @@ public class Runner {
         SimulationAlgorithm simuAlg = new GravityAlgorithm();
         // BarnesHutAlgorithm simuAlg = new BarnesHutAlgorithm();
 
+
+        int sliceValue = 10;
+        int particleCount = 5000;
+        /* START - Parts for GravityAlgorithm grid definitions */
+        sliceValue = 100;
+        particleCount = 2000;
+
+
+
+
+
+
+        Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
+        /* END - Parts for GravityAlgorithm grid definitions */
+
+
         // select an particle system base
         // ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
-		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000);
-		Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000,50,400);
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(50, particleCount);
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,2000,50,400);
 		// Grid2DInitAlgImpl initAlg = new Grid2DInitAlgImpl(500,5,100);
 
 
-		SimulationConfig config = new SimulationConfig(true, 2000, 10, 5, simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(true, particleCount, 10, 5, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();
