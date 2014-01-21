@@ -16,6 +16,8 @@ import java.awt.*;
  */
 public class BarnesHutAlgorithm implements SimulationAlgorithm {
 
+	private static final float GRAVITY = (float) (667384 * Math.pow(10, -11));
+	
 	private int lowerBound;
 	private int upperBound;
 
@@ -98,14 +100,24 @@ public class BarnesHutAlgorithm implements SimulationAlgorithm {
 				float lastY = lastPs.getCoordinates()[i + 1];
 				float lastZ = lastPs.getCoordinates()[i + 2];
 				
+				resultPs.getAcceleration()[i] = 0;
+				resultPs.getAcceleration()[i+1] = 0;
+				resultPs.getAcceleration()[i+2] = 0;
+				
 				lastPs.getRootNode().calculate(i, lastX, lastY, lastZ, resultPs);
 				
-				//s = v * t + s0
-				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i] + resultPs.getVelocity()[i] * 200;
-				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * 200;
-				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * 200;
+				//v = v0 + a * t 
+				resultPs.getVelocity()[i] = lastPs.getVelocity()[i] + GRAVITY * resultPs.getAcceleration()[i] * 10;
+				resultPs.getVelocity()[i+1] = lastPs.getVelocity()[i+1] + GRAVITY * resultPs.getAcceleration()[i+1] * 10;
+				resultPs.getVelocity()[i+2] = lastPs.getVelocity()[i+2] + GRAVITY * resultPs.getAcceleration()[i+2] * 10;
 				
-				float unsignedAcc = Math.abs(resultPs.getVelocity()[i]) * 100;
+				//s = v * t + s0
+				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i] + resultPs.getVelocity()[i] * 10;
+				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * 10;
+				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * 10;
+				
+				
+				float unsignedAcc = Math.abs(resultPs.getAcceleration()[i]) * 100;
 				
 				int red = (int) (17 + 4 * unsignedAcc );
 				int green = 209;

@@ -149,6 +149,11 @@ public class LocalCalculationHandler implements CalculationHandler {
 									simuAlg.getLowerBound(),
 									simuAlg.getUpperBound()));
 							
+							newParticleSystem.setAcceleration(mergeArray(
+									newParticleSystem.getAcceleration(),
+									tmpSystem.getAcceleration(),simuAlg.getLowerBound(),
+									simuAlg.getUpperBound()));
+							
 							results.remove(i);
 							i--;
 						} else {

@@ -152,6 +152,11 @@ public class SimulationServer implements SimulationHandler, Runnable {
 										tmpSystem.getVelocity(),handler.getLowerBound(),
 										handler.getUpperBound()));
 								
+								newParticleSystem.setAcceleration(mergeArray(
+										newParticleSystem.getAcceleration(),
+										tmpSystem.getAcceleration(),handler.getLowerBound(),
+										handler.getUpperBound()));
+								
 								results.remove(future);
 								i--;
 							}else{
