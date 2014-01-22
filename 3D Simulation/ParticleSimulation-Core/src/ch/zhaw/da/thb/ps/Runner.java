@@ -34,9 +34,31 @@ public class Runner {
 		ParticleInitializeAlgorithm initAlg = null;
 
 		int particleCount = 2000;
+		int sliceValue = 10;
 
+		/* START - Parts for GravityAlgorithm grid definitions */
+		// ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
+
+		/*
+		 * sliceValue = 100; particleCount = 2000;
+		 */
+
+		/*
+		 * sliceValue = 50; particleCount = 5000;
+		 */
+
+		sliceValue = 100;
+
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(sliceValue,
+		// particleCount);
+		/* END - Parts for GravityAlgorithm grid definitions */
+
+		// select an particle system base
+		// ParticleInitializeAlgorithm initAlg = new RandomParticleIniAlgImpl();
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(50, particleCount);
+		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,500,50,400);
+		// Grid2DInitAlgImpl initAlg = new Grid2DInitAlgImpl(500,5,100);
 		switch (aProgrammCode) {
-
 		// Gravity
 		case 1:
 			particleCount = 5000;
@@ -51,9 +73,8 @@ public class Runner {
 		case 3:
 			particleCount = 5000;
 			simuAlg = new GravityAlgorithm();
-			initAlg = new Grid3DInitAlgImpl(10, particleCount, 50, 400);
+			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount, 50, 400);
 			break;
-
 		// NBody
 		case 101:
 			particleCount = 650;
@@ -67,8 +88,9 @@ public class Runner {
 			break;
 		case 103:
 			particleCount = 650;
+			sliceValue = 10;
 			simuAlg = new NBodyBruteForceAlgorithm();
-			initAlg = new Grid3DInitAlgImpl(10, particleCount, 50, 400);
+			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount, 50, 400);
 			break;
 
 		// Barnes Hut
@@ -84,8 +106,9 @@ public class Runner {
 			break;
 		case 203:
 			particleCount = 1000;
+			sliceValue = 10;
 			simuAlg = new BarnesHutAlgorithm();
-			initAlg = new Grid3DInitAlgImpl(10, particleCount, 50, 400);
+			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount, 50, 400);
 			break;
 		default: {
 			simuAlg = new NBodyBruteForceAlgorithm();
