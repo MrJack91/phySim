@@ -58,6 +58,9 @@ public class Runner {
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(50, particleCount);
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,500,50,400);
 		// Grid2DInitAlgImpl initAlg = new Grid2DInitAlgImpl(500,5,100);
+
+        aProgrammCode = 3;
+
 		switch (aProgrammCode) {
 		// Gravity
 		case 1:
@@ -68,12 +71,13 @@ public class Runner {
 		case 2:
 			particleCount = 5000;
 			simuAlg = new GravityAlgorithm();
-			initAlg = new Grid2DInitAlgImpl(particleCount, 50, 100);
+			initAlg = new Grid2DInitAlgImpl(particleCount, 1, 1);
 			break;
 		case 3:
 			particleCount = 5000;
+            sliceValue = 50;
 			simuAlg = new GravityAlgorithm();
-			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount, 50, 400);
+			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
 			break;
 		// NBody
 		case 101:
@@ -116,8 +120,7 @@ public class Runner {
 		}
 		}
 
-		SimulationConfig config = new SimulationConfig(true, particleCount, 10,
-				2, simuAlg, initAlg);
+		SimulationConfig config = new SimulationConfig(true, particleCount, 10, 2, simuAlg, initAlg);
 
 		SimulationStarter starter = new SimulationStarter(config);
 		starter.start();
