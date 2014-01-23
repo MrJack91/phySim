@@ -59,7 +59,7 @@ public class Runner {
 		// Grid3DInitAlgImpl initAlg = new Grid3DInitAlgImpl(10,500,50,400);
 		// Grid2DInitAlgImpl initAlg = new Grid2DInitAlgImpl(500,5,100);
 
-        // aProgrammCode = 3;
+        // aProgrammCode = 1;
 
 		switch (aProgrammCode) {
 		// Gravity
