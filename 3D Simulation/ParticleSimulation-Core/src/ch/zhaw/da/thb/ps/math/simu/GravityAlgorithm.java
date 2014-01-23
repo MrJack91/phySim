@@ -3,8 +3,6 @@
  */
 package ch.zhaw.da.thb.ps.math.simu;
 
-import javax.vecmath.Color3f;
-
 /**
  * @author Daniel Brun
  *
@@ -17,7 +15,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
     /**
      * the mass of the base before calc
      */
-    private int baseCountInit = 10;
+    private int baseCountInit = 50;
 
     /**
      * the mass of the base while the count -> after
@@ -27,7 +25,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
     private double gravityConst;
     private double frictionConst;
 
-    private Color3f color3f;
+    // private Color3f color3f;
     private int threadCount;
 
     /**
@@ -53,7 +51,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
         simuAlg.frictionConst = frictionConst;
 
         simuAlg.threadCount = threadCount;
-        simuAlg.color3f = color3f;
+        // simuAlg.color3f = color3f;
 
         return (BaseAlgorithm) simuAlg;
     }
@@ -69,7 +67,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 e.printStackTrace();
             }
 
-            Color3f color3f = new Color3f();
+            // Color3f color3f = new Color3f();
 
             /*
             System.out.println("lowerBound\t" + lowerBound);
@@ -192,22 +190,25 @@ public class GravityAlgorithm extends BaseAlgorithm {
 
             // debug
             if (i == 60) {
+
                 /*
                 System.out.println("frictionConst:\t\t" + this.frictionConst);
                 System.out.println("gravityConst:\t\t" + this.gravityConst);
                 System.out.println("baseCountInit:\t\t" + this.baseCountInit);
-                */
 
-                /*
                 System.out.println("i:\t\t\t\t\t\t" + i);
 
-                System.out.println("corX:\t\t\t\t\t" + corX);
-                System.out.println("corY:\t\t\t\t\t" + corY);
-                System.out.println("corZ:\t\t\t\t\t" + corZ);
                 System.out.println("corX^2:\t\t\t\t\t" + Math.pow(corX, 2));
                 System.out.println("corY^2:\t\t\t\t\t" + Math.pow(corY, 2));
                 System.out.println("corZ^2:\t\t\t\t\t" + Math.pow(corZ, 2));
                 System.out.println("radius^2:\t\t\t\t" + (Math.pow(corX, 2) + Math.pow(corY, 2) + Math.pow(corZ, 2)));
+                */
+
+                /*
+                System.out.println("corX:\t\t\t\t\t" + corX);
+                System.out.println("corY:\t\t\t\t\t" + corY);
+                System.out.println("corZ:\t\t\t\t\t" + corZ);
+
                 System.out.println("radius:\t\t\t\t\t" + (radius));
                 System.out.println("nextRadius:\t\t\t\t" + (nextRadius));
                 System.out.println("curSpeed:\t\t\t\t" + curSpeed);
@@ -217,6 +218,7 @@ public class GravityAlgorithm extends BaseAlgorithm {
                 System.out.println("baseCountAdditional:\t" + this.baseCountAdditional);
                 System.out.println();
                 */
+
             }
         }
     }
