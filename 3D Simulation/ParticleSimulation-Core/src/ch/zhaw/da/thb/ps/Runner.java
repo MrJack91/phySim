@@ -142,7 +142,7 @@ public class Runner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Integer progCount = Integer.valueOf(5);
+		Integer progCount = Integer.valueOf(-1);
 
 		if (args.length == 1) {
 			progCount = Integer.parseInt(args[0]);
