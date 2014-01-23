@@ -133,7 +133,7 @@ public class Runner {
 			progCount = Integer.parseInt(args[0]);
 		}
 
-		new Runner(203);
+		new Runner(progCount);
 
 	}
 
