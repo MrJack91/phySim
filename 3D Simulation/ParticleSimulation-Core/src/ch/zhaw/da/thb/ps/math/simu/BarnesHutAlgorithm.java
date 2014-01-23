@@ -94,6 +94,7 @@ public class BarnesHutAlgorithm implements SimulationAlgorithm {
 
 			Color3f color3f = new Color3f();
 
+			int speedUp = 10;
 			// Loop over each particle in the given boundaries
 			for (int i = lowerBound; i < upperBound; i += 3) {
 				float lastX = lastPs.getCoordinates()[i];
@@ -107,17 +108,17 @@ public class BarnesHutAlgorithm implements SimulationAlgorithm {
 				lastPs.getRootNode().calculate(i, lastX, lastY, lastZ, resultPs);
 				
 				//v = v0 + a * t 
-				resultPs.getVelocity()[i] = lastPs.getVelocity()[i] + GRAVITY * resultPs.getAcceleration()[i] * 10;
-				resultPs.getVelocity()[i+1] = lastPs.getVelocity()[i+1] + GRAVITY * resultPs.getAcceleration()[i+1] * 10;
-				resultPs.getVelocity()[i+2] = lastPs.getVelocity()[i+2] + GRAVITY * resultPs.getAcceleration()[i+2] * 10;
+				resultPs.getVelocity()[i] = lastPs.getVelocity()[i] + GRAVITY * resultPs.getAcceleration()[i] * speedUp;
+				resultPs.getVelocity()[i+1] = lastPs.getVelocity()[i+1] + GRAVITY * resultPs.getAcceleration()[i+1] * speedUp;
+				resultPs.getVelocity()[i+2] = lastPs.getVelocity()[i+2] + GRAVITY * resultPs.getAcceleration()[i+2] * speedUp;
 				
 				//s = v * t + s0
-				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i] + resultPs.getVelocity()[i] * 10;
-				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * 10;
-				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * 10;
+				resultPs.getCoordinates()[i] = lastPs.getCoordinates()[i] + resultPs.getVelocity()[i] * speedUp;
+				resultPs.getCoordinates()[i+1] = lastPs.getCoordinates()[i+1] + resultPs.getVelocity()[i+1] * speedUp;
+				resultPs.getCoordinates()[i+2] = lastPs.getCoordinates()[i+2] + resultPs.getVelocity()[i+2] * speedUp;
 				
 				
-				float unsignedAcc = Math.abs(resultPs.getAcceleration()[i]) * 100;
+				float unsignedAcc = Math.abs(resultPs.getAcceleration()[i]);
 				
 				int red = (int) (17 + 4 * unsignedAcc );
 				int green = 209;

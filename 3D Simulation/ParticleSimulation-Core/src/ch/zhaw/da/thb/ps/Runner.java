@@ -10,6 +10,7 @@ import ch.zhaw.da.thb.ps.math.init.ParticleInitializeAlgorithm;
 import ch.zhaw.da.thb.ps.math.init.RandomParticleIniAlgImpl;
 import ch.zhaw.da.thb.ps.math.simu.BarnesHutAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.GravityAlgorithm;
+import ch.zhaw.da.thb.ps.math.simu.GravityCorrAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.NBodyBruteForceAlgorithm;
 import ch.zhaw.da.thb.ps.math.simu.SimulationAlgorithm;
 import ch.zhaw.da.thb.ps.simulation.SimulationConfig;
@@ -79,6 +80,17 @@ public class Runner {
 			simuAlg = new GravityAlgorithm();
 			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
 			break;
+		case 4:
+			particleCount = 20000;
+			simuAlg = new GravityCorrAlgorithm();
+			initAlg = new Grid2DInitAlgImpl(particleCount, 1, 1);
+			break;
+		case 5:
+			particleCount = 20000;
+			sliceValue = 200;
+			simuAlg = new GravityCorrAlgorithm();
+			initAlg = new Grid3DInitAlgImpl(sliceValue, particleCount);
+			break;
 		// NBody
 		case 101:
 			particleCount = 650;
@@ -99,7 +111,7 @@ public class Runner {
 
 		// Barnes Hut
 		case 201:
-			particleCount = 1000;
+			particleCount = 3000;
 			simuAlg = new BarnesHutAlgorithm();
 			initAlg = new RandomParticleIniAlgImpl();
 			break;
@@ -130,7 +142,7 @@ public class Runner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Integer progCount = Integer.valueOf(-1);
+		Integer progCount = Integer.valueOf(5);
 
 		if (args.length == 1) {
 			progCount = Integer.parseInt(args[0]);
